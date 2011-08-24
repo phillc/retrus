@@ -1,0 +1,6 @@
+{ "name" : "retrus",
+  "dependencies" : { "express": "2.2.2",
+                     "socket.io": "0.7" },
+  "engines" : { "node" : "0.5.4" },
+  "version" : "0.0.0" }
+
