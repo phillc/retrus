@@ -1,5 +1,6 @@
 { "name" : "retrus",
-  "dependencies" : { "express": "2.2.2",
+  "dependencies" : { "coffee-script": "*",
+                     "express": "2.2.2",
                      "jade": "0.15.4",
                      "socket.io": "0.8",
                      "mongodb": "*" },
