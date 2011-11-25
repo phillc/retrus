@@ -14,7 +14,7 @@ Retrus.Note = Backbone.Model.extend({
     ups: 0,
     downs: 0,
   },
-  urlRoot: "notes"
+  urlRoot: "note"
 })
 
 Retrus.NoteList = Backbone.Collection.extend({
@@ -46,9 +46,9 @@ Retrus.NoteListView = Backbone.View.extend({
     var view = new Retrus.NoteView({ model: note });
     $(this.el).append(view.render().el)
   },
-  addAll: function() {
-    this.collection.each(this.addOne, this)
-  }
+  // addAll: function() {
+  //   this.collection.each(this.addOne, this)
+  // }
 });
 
 Retrus.AddNoteView = Backbone.View.extend({
@@ -58,10 +58,14 @@ Retrus.AddNoteView = Backbone.View.extend({
     "click .cancel": "close",
     "submit .add-note-form": "add"
   },
+  initialize: function(options) {
+    this.section = options.section;
+  },
   add: function(event) {
     event.preventDefault();
     var el = $(this.el);
-    new Retrus.Note({ body: $(event.target).find(".note-input").val()}).
+    new Retrus.Note({ text: $(event.target).find(".note-input").val(),
+                      sectionId: this.section.get('id') }).
       save({}, { error: function() {console.log("error")},
                  success: function() {console.log("success")}
                  });  
@@ -82,7 +86,7 @@ Retrus.AddNoteView = Backbone.View.extend({
       <form class="add-note-form">\
         <div class="modal-header">\
           <a href="#" class="close">&times;</a>\
-          <h3>Add Note to: ' + this.options.sectionName + '</h3>\
+          <h3>Add Note to: ' + this.section.get('name') + '</h3>\
         </div>\
         <div class="modal-body">\
           <input class="note-input" type="text" />\
@@ -105,7 +109,7 @@ Retrus.SectionView = Backbone.View.extend({
   },
   initialize: function() {
     this.noteListView = new Retrus.NoteListView({ collection: this.model.noteList });
-    this.addNoteView = new Retrus.AddNoteView({ sectionName: this.model.get('name') });
+    this.addNoteView = new Retrus.AddNoteView({ section: this.model });
   },
   addNote: function() {
     this.addNoteView.open();
@@ -121,13 +125,19 @@ Retrus.SectionView = Backbone.View.extend({
 });
 
 Retrus.SectionListView = Backbone.View.extend({
-  initialize: function() {
-    this.collection.bind("add",   this.addOne, this);
-    // this.collection.bind("all",   this.render, this)
+  tagName: 'div',
+  id: 'section-notes',
+  initialize: function(sectionList) {
+    this.collection = sectionList;
+    this.collection.bind("add", this.addOne, this);
+    this.collection.bind("reset", this.reset, this)
   },
   addOne: function(section) {
-    var view = new Retrus.SectionView({ model: section });
-    this.el.append(view.render().el)
+    var sectionView = new Retrus.SectionView({ model: section });
+    $(this.el).append(sectionView.render().el)
+  },
+  reset: function(sections) {
+    sections.each(this.addOne, this)
   }
 });
 
@@ -143,22 +153,26 @@ Retrus.Section = Backbone.Model.extend({
 
 Retrus.SectionList = Backbone.Collection.extend({
   model: Retrus.Section,
+  url: "sections",
   initialize: function() {
-    window.socket.on('addSection', _.bind(this.add, this));
+    this.ioBind('create', function(){console.log('hi')}, this);
   }
 });
 
 Retrus.App = Backbone.Router.extend({
-  initialize: function() {
-    this.sectionList = new Retrus.SectionList();
-    this.sectionListView = new Retrus.SectionListView({ collection: this.sectionList, el: $("#sections-notes") });
-  },
   routes: {
     "": "index",
     "/": "index"
   },
   index: function(actions){
-    this.sectionListView.render();
+    var sectionList = new Retrus.SectionList();
+    var sectionListView = new Retrus.SectionListView(sectionList);
+    $('#retrus').append(sectionListView.el);
+    
+    // For debug:
+    window.sectionList = sectionList;
+    
+    sectionList.fetch();
   },
 });
 

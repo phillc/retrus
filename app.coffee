@@ -17,11 +17,17 @@ app.get '/', (req, res) ->
   res.render('index')
 
 io.sockets.on 'connection', (socket) ->
-  socket.emit "addSection", getSections()
-  socket.on "notes:create", -> console.log("got a foo")
+  socket.on 'sections:read', (data, callback) ->
+    callback null, sections
 
+  socket.on 'note:create', (data) -> console.log("got a foo", data)
 
-sections = [{ name: "What went well"}, { name: "What sucked" }]
+tmpId = ->
+  Math.floor(Math.random() * 10000)
+
+sections = [ { id: tmpId(), name: "What went well", color: "#ffccaa" },
+             { id: tmpId(), name: "What sucked", color: "#eeff00" }]
 
 getSections = ->
   sections
+  
