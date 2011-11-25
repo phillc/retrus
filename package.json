@@ -1,6 +1,9 @@
 { "name" : "retrus",
   "dependencies" : { "express": "2.2.2",
-                     "socket.io": "0.7" },
+                     "jade": "0.15.4",
+                     "socket.io": "0.8",
+                     "mongodb": "*" },
+  "devDependencies" : { "jasmine-node": "1.0.10"},
   "engines" : { "node" : "0.5.4" },
   "version" : "0.0.0" }
 
