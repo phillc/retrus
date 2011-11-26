@@ -1,10 +1,11 @@
-{ "name" : "retrus",
-  "dependencies" : { "coffee-script": "*",
-                     "express": "2.2.2",
-                     "jade": "0.15.4",
-                     "socket.io": "0.8",
-                     "mongoose": "2.3.13" },
-  "devDependencies" : { "jasmine-node": "1.0.10"},
-  "engines" : { "node" : "0.5.4" },
-  "version" : "0.0.0" }
+{ "name" : "retrus"
+, "dependencies" : { "coffee-script": "*"
+                   , "express": "2.2.2"
+                   , "jade": "0.15.4"
+                   , "socket.io": "0.8"
+                   , "mongoose": "2.3.13" }
+, "devDependencies" : { "jasmine-node": "1.0.10"
+                      , "jslint" }
+, "engines" : { "node" : "0.5.4" }
+, "version" : "0.0.0" }
 

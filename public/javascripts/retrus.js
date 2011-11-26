@@ -1,4 +1,4 @@
-var Retrus = {}
+var Retrus = {};
 
 Retrus.Group = Backbone.Model.extend({
 
@@ -6,7 +6,7 @@ Retrus.Group = Backbone.Model.extend({
 
 Retrus.GroupList = Backbone.Collection.extend({
   model: Retrus.Group
-})
+});
 
 Retrus.Note = Backbone.Model.extend({
   defaults: {
@@ -15,7 +15,7 @@ Retrus.Note = Backbone.Model.extend({
     downs: 0,
   },
   urlRoot: "note"
-})
+});
 
 Retrus.NoteList = Backbone.Collection.extend({
   model: Retrus.Note
@@ -44,7 +44,7 @@ Retrus.NoteListView = Backbone.View.extend({
   },
   addOne: function(note) {
     var view = new Retrus.NoteView({ model: note });
-    $(this.el).append(view.render().el)
+    $(this.el).append(view.render().el);
   },
   // addAll: function() {
   //   this.collection.each(this.addOne, this)
@@ -66,8 +66,8 @@ Retrus.AddNoteView = Backbone.View.extend({
     var el = $(this.el);
     new Retrus.Note({ text: $(event.target).find(".note-input").val(),
                       sectionId: this.section.get('id') }).
-      save({}, { error: function() {console.log("error")},
-                 success: function() {console.log("success")}
+      save({}, { error: function() { console.log("error"); },
+                 success: function() { console.log("success"); }
                  });  
     el.modal('hide');
   },
@@ -82,20 +82,19 @@ Retrus.AddNoteView = Backbone.View.extend({
   },
   render: function() {
     var el = $(this.el);
-    el.html('\
-      <form class="add-note-form">\
-        <div class="modal-header">\
-          <a href="#" class="close">&times;</a>\
-          <h3>Add Note to: ' + this.section.get('name') + '</h3>\
-        </div>\
-        <div class="modal-body">\
-          <input class="note-input" type="text" />\
-        </div>\
-        <div class="modal-footer">\
-          <input type="submit" class="btn primary add" value="Add" />\
-          <button class="btn secondary cancel">Cancel</button>\
-        </div>\
-      </form>'
+    el.html( '<form class="add-note-form">'
+           + '  <div class="modal-header">'
+           + '    <a href="#" class="close">&times;</a>'
+           + '    <h3>Add Note to: ' + this.section.get('name') + '</h3>'
+           + '  </div>'
+           + '  <div class="modal-body">'
+           + '    <input class="note-input" type="text" />'
+           + '  </div>'
+           + '  <div class="modal-footer">'
+           + '    <input type="submit" class="btn primary add" value="Add" />'
+           + '    <button class="btn secondary cancel">Cancel</button>'
+           + '  </div>'
+           + '</form>'
     );
     return this;
   }
@@ -130,14 +129,14 @@ Retrus.SectionListView = Backbone.View.extend({
   initialize: function(sectionList) {
     this.collection = sectionList;
     this.collection.bind("add", this.addOne, this);
-    this.collection.bind("reset", this.reset, this)
+    this.collection.bind("reset", this.reset, this);
   },
   addOne: function(section) {
     var sectionView = new Retrus.SectionView({ model: section });
-    $(this.el).append(sectionView.render().el)
+    $(this.el).append(sectionView.render().el);
   },
   reset: function(sections) {
-    sections.each(this.addOne, this)
+    sections.each(this.addOne, this);
   }
 });
 
@@ -155,7 +154,7 @@ Retrus.SectionList = Backbone.Collection.extend({
   model: Retrus.Section,
   url: "sections",
   initialize: function() {
-    this.ioBind('create', function(){console.log('hi')}, this);
+    this.ioBind('create', function(){ console.log('hi'); }, this);
   }
 });
 
@@ -180,5 +179,5 @@ window.onload = function() {
   window.socket = new io.connect();
   window.app = new Retrus.App();
   Backbone.history.start();
-}
+};
 
