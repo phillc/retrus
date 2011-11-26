@@ -44,6 +44,13 @@ app.configure 'production', ->
 app.get '/', (req, res) ->
   res.render('index')
 
+app.post '/create', (req, res) ->
+  res.render('create')
+
+app.get '/retro/:id', (req, res) ->
+  id = req.params.id
+  res.render('retro')
+
 io.sockets.on 'connection', (socket) ->
   socket.on 'sections:read', (data, callback) ->
     Section.find {}, (err, docs) ->
