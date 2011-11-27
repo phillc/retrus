@@ -45,11 +45,16 @@ app.get '/', (req, res) ->
   res.render('index')
 
 app.post '/create', (req, res) ->
-  res.render('create')
+  id = 1
+  res.redirect('/retro/' + id + '/director')
 
-app.get '/retro/:id', (req, res) ->
+app.get '/retro/:id/director', (req, res) ->
   id = req.params.id
-  res.render('retro')
+  res.render('retro/director')
+
+app.get '/retro/:id/participant', (req, res) ->
+  id = req.params.id
+  res.render('retro/participant')
 
 io.sockets.on 'connection', (socket) ->
   socket.on 'sections:read', (data, callback) ->
