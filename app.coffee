@@ -1,10 +1,13 @@
 express = require('express')
-app = express.createServer()
+app = module.exports = express.createServer()
 io = require('socket.io').listen(app)
 mongoose = require('mongoose')
 Schema = mongoose.Schema
 
 mongoose.connect 'mongodb://localhost/retrus'
+
+validatePresenceOf = (value) ->
+  value.length > 0
 
 NoteSchema = new Schema({ text: String
                         , ups: Number
@@ -17,7 +20,7 @@ SectionSchema = new Schema({ name: String
                            , color: String
                            , notes: [NoteSchema] })
 
-RetroSchema = new Schema({ name: String
+RetroSchema = new Schema({ name: { type: String, validate: [validatePresenceOf, 'Please enter a name for this retro.']}
                          , sections: [SectionSchema] })
 
 Note = mongoose.model 'Note', NoteSchema
@@ -30,7 +33,6 @@ Section.count {}, (err, size) ->
     new Section({ name: "What went well", color: "#ffccaa" }).save()
     new Section({ name: "What sucked", color: "#eeff00" }).save()
 
-app.listen(3000)
 app.set('view engine', 'jade')
 app.use(express.static(__dirname + '/public'))
 
@@ -42,19 +44,20 @@ app.configure 'production', ->
   app.use(express.errorHandler())
 
 app.get '/', (req, res) ->
-  res.render('index')
+  res.render 'index'
 
-app.post '/create', (req, res) ->
+app.post '/retro/create', (req, res) ->
   id = 1
-  res.redirect('/retro/' + id + '/director')
+  # res.redirect('/retro/' + id + '/director')
+  res.render 'retro/create'
 
 app.get '/retro/:id/director', (req, res) ->
   id = req.params.id
-  res.render('retro/director')
+  res.render 'retro/director'
 
 app.get '/retro/:id/participant', (req, res) ->
   id = req.params.id
-  res.render('retro/participant')
+  res.render 'retro/participant'
 
 io.sockets.on 'connection', (socket) ->
   socket.on 'sections:read', (data, callback) ->
@@ -63,3 +66,5 @@ io.sockets.on 'connection', (socket) ->
       callback null, docs
 
   socket.on 'note:create', (data) -> console.log("got a foo", data)
+
+app.listen(3000) if !module.parent
