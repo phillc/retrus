@@ -1,12 +1,12 @@
 { "name" : "retrus"
-, "dependencies" : { "coffee-script": "1.1.3"
-                   , "express": "2.2.2"
-                   , "jade": "0.15.4"
+, "dependencies" : { "coffee-script": "1.2.0"
+                   , "express": "2.5.4"
+                   , "jade": "0.20.3"
                    , "socket.io": "0.8"
-                   , "mongoose": "2.3.13" }
-, "devDependencies" : { "mocha": "0.0.8"
+                   , "mongoose": "2.5.6" }
+, "devDependencies" : { "mocha": "0.13.0"
                       , "tobi": "0.3.2"
                       , "jslint": "0.1.0" }
-, "engines" : { "node" : "0.5.4" }
+, "engines" : { "node" : "0.6.8" }
 , "version" : "0.0.0" }
 
