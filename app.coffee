@@ -1,4 +1,5 @@
 express = require('express')
+require('express-resource')
 app = module.exports = express.createServer()
 io = require('socket.io').listen(app)
 mongoose = require('mongoose')
@@ -39,21 +40,17 @@ app.use(express.static(__dirname + '/public'))
 app.configure 'development', ->
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
 
-
 app.configure 'production', ->
   app.use(express.errorHandler())
 
 app.get '/', (req, res) ->
   res.render 'index'
 
+app.resource 'retros', require("./resources/retro")
 app.post '/retro/create', (req, res) ->
   id = 1
   # res.redirect('/retro/' + id + '/director')
   res.render 'retro/create'
-
-app.get '/retro/:id/director', (req, res) ->
-  id = req.params.id
-  res.render 'retro/director'
 
 app.get '/retro/:id/participant', (req, res) ->
   id = req.params.id

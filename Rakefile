@@ -7,5 +7,5 @@ end
 
 desc "test"
 task :test do
-  puts `mocha`
+  puts `mocha test/**/*_test.coffee`
 end
