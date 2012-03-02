@@ -46,7 +46,7 @@ app.configure 'production', ->
 app.get '/', (req, res) ->
   res.render 'index'
 
-app.resource 'retros', require("./resources/retro")
+app.resource 'retrospectives', require("./resources/retrospectives")
 app.post '/retro/create', (req, res) ->
   id = 1
   # res.redirect('/retro/' + id + '/director')
