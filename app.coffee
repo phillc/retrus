@@ -64,4 +64,6 @@ io.sockets.on 'connection', (socket) ->
 
   socket.on 'note:create', (data) -> console.log("got a foo", data)
 
-app.listen(3000) if !module.parent
+if !module.parent
+  app.listen(3000)
+  console.log("Express server listening on port %d", app.address().port)
