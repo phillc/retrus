@@ -43,14 +43,7 @@ app.configure 'development', ->
 app.configure 'production', ->
   app.use(express.errorHandler())
 
-app.get '/', (req, res) ->
-  res.render 'index'
-
 app.resource 'retrospectives', require("./resources/retrospectives")
-app.post '/retro/create', (req, res) ->
-  id = 1
-  # res.redirect('/retro/' + id + '/director')
-  res.render 'retro/create'
 
 app.get '/retro/:id/participant', (req, res) ->
   id = req.params.id
