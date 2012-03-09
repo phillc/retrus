@@ -1,0 +1,15 @@
+.title {
+  padding: 140px;
+  color: #00f !important;
+  width: 100px;
+  height: 10px;
+  background: #000;
+}
+.title {
+  background: #f00;
+  color: #ff0;
+  height: 300px;
+  width: 40px;
+  color: #f00;
+  background: #ff0;
+}
