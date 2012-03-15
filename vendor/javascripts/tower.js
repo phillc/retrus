@@ -12,7 +12,7 @@
 
   global.Tower = Tower = {};
 
-  Tower.version = "0.3.9-9";
+  Tower.version = "0.3.9-11";
 
   Tower.logger = console;
 
@@ -1590,7 +1590,7 @@
       "=~": "$regex",
       "$m": "$regex",
       "$regex": "$regex",
-      "$match": "$match",
+      "$match": "$regex",
       "$notMatch": "$notMatch",
       "!~": "$nm",
       "$nm": "$nm",
@@ -3368,7 +3368,9 @@
               updates = {};
               if (push) updates["$push"] = push;
               if (inc) updates["$inc"] = inc;
-              return _this.owner.updateAttributes(updates, callback);
+              return _this.owner.updateAttributes(updates, function(error) {
+                if (callback) return callback.call(_this, error, record);
+              });
             } else {
               if (callback) return callback.call(_this, error, record);
             }
@@ -4200,7 +4202,7 @@
       componentSuffix: "widget",
       hintClass: "hint",
       hintTag: "figure",
-      labelClass: "label",
+      labelClass: "control-label",
       requiredClass: "required",
       requiredAbbr: "*",
       requiredTitle: "Required",
@@ -4229,7 +4231,7 @@
       inlineValidations: true,
       autoIdForm: true,
       fieldsetClass: "fieldset",
-      fieldClass: "field",
+      fieldClass: "field control-group",
       validateClass: "validate",
       legendClass: "legend",
       formClass: "form",
@@ -4364,7 +4366,7 @@
       }
     },
     _renderString: function(string, options, callback) {
-      var coffeekup, e, engine, hardcode, helper, locals, result, _len5, _m, _ref5;
+      var coffeekup, e, engine, hardcode, helper, locals, mint, result, _len5, _m, _ref5;
       if (options == null) options = {};
       if (!!options.type.match(/coffee/)) {
         e = null;
@@ -4393,9 +4395,11 @@
         }
         return callback(e, result);
       } else if (options.type) {
+        mint = require("mint");
         engine = require("mint").engine(options.type);
         return mint[engine](string, options.locals, callback);
       } else {
+        mint = require("mint");
         engine = require("mint");
         options.locals.string = string;
         return engine.render(options.locals, callback);
@@ -5116,9 +5120,12 @@
     };
 
     Field.prototype.submitInput = function(key, options) {
-      return this.tag("input", _.extend({
+      var value;
+      value = options.value;
+      delete options.value;
+      return this.tag("button", _.extend({
         type: "submit"
-      }, options));
+      }, options), value);
     };
 
     Field.prototype.fileInput = function(key, options) {
@@ -5128,10 +5135,13 @@
     };
 
     Field.prototype.textInput = function(key, options) {
-      return this.tag("textarea", options);
+      var value;
+      value = options.value;
+      delete options.value;
+      return this.tag("textarea", options, value);
     };
 
-    Field.prototype.password_input = function(key, options) {
+    Field.prototype.passwordInput = function(key, options) {
       return this.tag("input", _.extend({
         type: "password"
       }, options));
@@ -5170,6 +5180,15 @@
       }, options));
     };
 
+    Field.prototype.arrayInput = function(key, options) {
+      if (options.value) {
+        options.value = Tower.Support.Object.toArray(options.value).join(", ");
+      }
+      return this.tag("input", _.extend({
+        "data-type": "array"
+      }, options));
+    };
+
     Field.prototype.label = function() {
       var _this = this;
       if (!this.labelValue) return;
@@ -5200,7 +5219,15 @@
           return block.call(_this);
         } else {
           _this.label();
-          return _this.input();
+          if (_this.inputType === "submit") {
+            return _this.input();
+          } else {
+            return _this.tag("div", {
+              "class": "controls"
+            }, function() {
+              return _this.input();
+            });
+          }
         }
       });
     };
@@ -5364,6 +5391,12 @@
         href: path,
         title: title
       }), title.toString());
+    },
+    navItem: function(title, path, options) {
+      if (options == null) options = {};
+      return li(function() {
+        return linkTo(title, path, options);
+      });
     }
   };
 
@@ -7126,7 +7159,7 @@
     String.prototype.parse = function(value) {
       var arrays, i, node, values, _len5,
         _this = this;
-      arrays = value.split(/(?:[\s|\+]OR[\s|\+]|\||,)/);
+      arrays = value.split(/(?:[\s|\+]OR[\s|\+]|\||,)/g);
       for (i = 0, _len5 = arrays.length; i < _len5; i++) {
         node = arrays[i];
         values = [];

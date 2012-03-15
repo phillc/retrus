@@ -1,5 +1,5 @@
 module.exports =
   key: "retrus-session-key"
-  secret: "1d08fc645341312682f6900e7593816b83595b86"
+  secret: "f3eccf9ee6fa529dedfe874dc0fcc18e5ab4401b"
   cookie:
     domain: ".localhost"

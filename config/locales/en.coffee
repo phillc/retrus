@@ -9,6 +9,18 @@ module.exports =
   github:       "User"
   email:        "spyyderz@gmail.com"
   
+  titles:
+    index: "%{name}"
+    show: "%{name} overview"
+    new: "Create a new %{name}"
+    edit: "Editing %{name}"
+  
+  links:
+    retrospectives: "Retrospective"
+    default: "%{name}"
+    home: "Home"
+    docs: "Docs"
+  
   openGraph:
     siteName:       "Retrus"
     title:          "Retrus"

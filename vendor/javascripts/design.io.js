@@ -1,11 +1,13 @@
+
 window.DesignIO = (function() {
 
-  function DesignIO(options) {
+  function DesignIO(namespace, options) {
     options || (options = {});
     this.callbacks = {};
     this.watchers = [];
     this.port = options.port || 4181;
-    this.url = options.url || ("" + window.location.protocol + "//" + window.location.hostname + ":" + this.port + "/design.io");
+    this.namespace = namespace;
+    this.url = options.url || ("" + window.location.protocol + "//" + window.location.hostname + ":" + this.port);
     this.socket = io.connect(this.url);
     this.connect();
   }
@@ -76,6 +78,7 @@ window.DesignIO = (function() {
     if (typeof data === "object") {
       data.userAgent = window.navigator.userAgent;
       data.url = window.location.href;
+      data.namespace = this.namespace;
     }
     return this.socket.emit('log', JSON.stringify(data, this.replacer));
   };
@@ -83,7 +86,8 @@ window.DesignIO = (function() {
   DesignIO.prototype.userAgent = function() {
     return {
       userAgent: window.navigator.userAgent,
-      url: window.location.href
+      url: window.location.href,
+      namespace: this.namespace
     };
   };
 

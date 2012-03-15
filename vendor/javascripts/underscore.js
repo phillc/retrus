@@ -905,7 +905,17 @@
   // Within an interpolation, evaluation, or escaping, remove HTML escaping
   // that had been previously added.
   var unescape = function(code) {
-    return code.replace(/\\\\/g, '\\').replace(/\\'/g, "'");
+    return code.replace(/\\(\\|'|r|n|t|u2028|u2029)/g, function(match, char) {
+      switch (char) {
+        case '\\': return '\\';
+        case "'": return "'";
+        case 'r': return '\r';
+        case 'n': return '\n';
+        case 't': return '\t';
+        case 'u2028': return '\u2028';
+        case 'u2029': return '\u2029';
+      }
+    });
   };
 
   // JavaScript micro-templating, similar to John Resig's implementation.
@@ -917,18 +927,20 @@
       'with(obj||{}){__p.push(\'' +
       str.replace(/\\/g, '\\\\')
          .replace(/'/g, "\\'")
-         .replace(c.escape || noMatch, function(match, code) {
-           return "',_.escape(" + unescape(code) + "),'";
-         })
-         .replace(c.interpolate || noMatch, function(match, code) {
-           return "'," + unescape(code) + ",'";
-         })
-         .replace(c.evaluate || noMatch, function(match, code) {
-           return "');" + unescape(code).replace(/[\r\n\t]/g, ' ') + ";__p.push('";
-         })
          .replace(/\r/g, '\\r')
          .replace(/\n/g, '\\n')
          .replace(/\t/g, '\\t')
+         .replace(/\u2028/g, '\\u2028')
+         .replace(/\u2029/g, '\\u2029')
+         .replace(c.escape || noMatch, function(match, code) {
+           return "',_.escape(" + unescape(code) + "),\n'";
+         })
+         .replace(c.interpolate || noMatch, function(match, code) {
+           return "'," + unescape(code) + ",\n'";
+         })
+         .replace(c.evaluate || noMatch, function(match, code) {
+           return "');" + unescape(code) + ";\n__p.push('";
+         })
          + "');}return __p.join('');";
     var func = new Function('obj', '_', tmpl);
     if (data) return func(data, _);

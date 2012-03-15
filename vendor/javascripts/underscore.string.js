@@ -16,10 +16,13 @@
   var nativeTrimLeft = String.prototype.trimLeft;
 
   var parseNumber = function(source) { return source * 1 || 0; };
-
-  var strRepeat = function(i, m) {
-    for (var o = []; m > 0; o[--m] = i) {}
-    return o.join('');
+  
+  var strRepeat = function(str, qty, separator){
+    // ~~var — is the fastest available way to convert anything to Integer in javascript.
+    // We'll use it extensively in this lib.
+    str = ''+str; qty = ~~qty;
+    for (var repeat = []; qty > 0; repeat[--qty] = str) {}
+    return repeat.join(separator == null ? '' : separator);
   };
 
   var slice = function(a){
@@ -448,8 +451,8 @@
     },
 
     slugify: function(str) {
-      var from  = "àáäâèéëêìíïîòóöôùúüûñç·/_:;",
-          to    = "aaaaeeeeiiiioooouuuunc",
+      var from  = "ąàáäâćęèéëêìíïîłńòóöôùúüûñçżź·/_:;",
+          to    = "aaaaaceeeeeiiiilnoooouuuunczz",
           regex = new RegExp(defaultToWhiteSpace(from), 'g');
 
       str = (''+str).toLowerCase();
@@ -470,13 +473,7 @@
       return result;
     },
     
-    repeat: function(str, qty, separator){
-      str = ''+str; qty = ~~qty;
-      if (separator == null) separator = '';
-      var repeat = [];
-      for(var i = 0; i < qty; i++) repeat.push(str);
-      return repeat.join(separator);
-    }
+    repeat: strRepeat
 
   };
 
