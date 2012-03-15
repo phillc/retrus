@@ -4,6 +4,8 @@ module.exports =
       "/app/client/config/application"
       "/config/routes"
       "/app/views/templates"
+      "/app/models/retrospective"
+      "/app/client/controllers/retrospectivesController"
     ]
     
     lib: [
