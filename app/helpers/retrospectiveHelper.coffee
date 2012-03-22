@@ -1,3 +1,0 @@
-App.RetrospectiveHelper =
-  retrospectiveElements: ->
-    $(".undefined")
