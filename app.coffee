@@ -1,4 +1,5 @@
 express = require("express")
+require("express-resource")
 routes = require("./routes")
 app = module.exports = express.createServer()
 app.configure ->
@@ -19,5 +20,8 @@ app.configure "production", ->
   app.use express.errorHandler()
 
 app.get "/", routes.index
+app.resource 'retrospectives', require('./routes/retrospectives')
+
+
 app.listen 3000
 console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env
