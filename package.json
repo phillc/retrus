@@ -1,18 +1,15 @@
-{
-  "description": "A Flatiron HTTP application",
-  "version": "0.0.0",
-  "private": true,
-  "dependencies": {
-    "union": "0.1.7",
-    "flatiron": "0.1.15"
-  },
-  "devDependencies": {
-    "api-easy": "0.3.2",
-    "vows": "0.6.1"
-  },
-  "scripts": {
-    "test": "vows --spec",
-    "start": "node app.js"
-  },
-  "name": "retrus"
-}
+{ "name" : "retrus"
+, "dependencies" : { "coffee-script": "1.2.0"
+                   , "express": "2.5.4"
+                   , "express-resource": "0.2.4"
+                   , "jade": "0.20.3"
+                   , "socket.io": "0.8"
+                   , "mongoose": "2.5.6"
+                   }
+, "devDependencies" : { "mocha": "*"
+                      , "should": "*"
+                      , "sinon": "*"
+                      }
+, "engines" : { "node" : "0.6.8" }
+, "version" : "0.0.0" }
+
