@@ -12,7 +12,7 @@ describe "retrospectives", ->
   describe "index", ->
     it "should display index with retrospectives", (done)->
       res.render = (view, vars) ->
-          view.should.equal "index"
+          view.should.equal "retrospectives/index"
           vars.title.should.equal "Retrospectives"
           done()
       routes.index(req, res)
