@@ -1,4 +1,4 @@
-routes = require "../routes/retrospectives"
+routes = require "../../routes/retrospectives"
 require "should"
 
 describe "retrospectives", ->
