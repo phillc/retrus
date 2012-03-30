@@ -2,7 +2,7 @@
     "name": "retrus"
   , "version": "0.0.1"
   , "private": true
-  , "engines": { "node": ">= 0.6.0" }
+  , "engines": { "node": ">= 0.6.14" }
   , "dependencies": {
       "coffee-script": ">= 1.2.0"
     , "express": "2.5.8"
@@ -16,7 +16,7 @@
     , "ss-stylus": "0.1.x"
   }
   , "devDependencies": {
-      "mocha": ">= 0.14.1"
+      "mocha": ">= 1.0.0"
     , "nodemon": ">= 0.6.12"
     , "should": ">= 0.6.0"
   }

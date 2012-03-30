@@ -3,7 +3,9 @@ module.exports = nohm.model 'Retrospective',
     properties:
       name:
         type: 'string'
+        validations: [ "notEmpty" ]
       private:
-        type: 'boolean'
+        type: 'bool'
+        defaultValue: false
 
 

@@ -4,22 +4,54 @@ redisClient = require('redis').createClient()
 nohm.setClient(redisClient)
 nohm.setPrefix('retrus')
 
-require "should"
+should = require "should"
 Retrospective = require("../../app/models").Retrospective
 
 describe "Retrospective", ->
-  validAttributes =
-    name: "Retro name"
+  before ->
+    redisClient.flushdb()
 
-  it "should save", (done) ->
-    retrospective = new Retrospective
-    retrospective.property
-      name: "Awesome"
-    console.log "and going..\n"
-    # console.log "save ", retrospective.save
-    retrospective.save (err) ->
-      console.log("oops, fail. ", err)
+  beforeEach ->
+    @validAttributes =
+      name: "Retro name"
 
-      Retrospective.find (err, ids) ->
-        console.log "ids", ids
+  describe "name", ->
+    it "should be saved", (done) ->
+      retrospective = new Retrospective
+
+      name = "Awesome"
+      @validAttributes.name = name
+      retrospective.property @validAttributes
+
+      retrospective.save (err) ->
+        should.not.exist(err)
+
+        new Retrospective.load retrospective.id, (err, properties) ->
+          should.not.exist(err)
+          properties.name.should.equal name
+          done()
+
+    it "should be required", (done) ->
+      retrospective = new Retrospective
+
+      @validAttributes.name = ""
+      retrospective.property @validAttributes
+
+      retrospective.save (err) ->
+        should.exist(err)
+        retrospective.errors.name.should.eql [ "notEmpty" ]
         done()
+
+  describe "private", ->
+    it "should default to false", (done) ->
+      retrospective = new Retrospective
+
+      retrospective.property @validAttributes
+
+      retrospective.save (err) ->
+        should.not.exist(err)
+        retrospective.property("private").should.be.false
+        done()
+
+
+
