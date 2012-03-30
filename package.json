@@ -1,11 +1,13 @@
 {
-    "name": "application-name"
+    "name": "retrus"
   , "version": "0.0.1"
   , "private": true
   , "dependencies": {
       "express": "2.5.8"
     , "express-resource": "0.2.4"
     , "jade": ">= 0.0.1"
+    , "nohm": ">= 0.9.0-pre2"
+    , "redis": ">= 0.7.1"
   }
   , "devDependencies": {
       "mocha": ">= 0.14.1"
