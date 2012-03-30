@@ -5,7 +5,7 @@ nohm.setClient(redisClient)
 nohm.setPrefix('retrus')
 
 require "should"
-Retrospective = require("../../models").Retrospective
+Retrospective = require("../../app/models").Retrospective
 
 describe "Retrospective", ->
   validAttributes =
