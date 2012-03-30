@@ -4,15 +4,15 @@ express = require("express")
 require("express-resource")
 
 app = module.exports = express.createServer()
-routes = require("./routes")
 
 app.configure ->
-  app.set "views", __dirname + "/views"
+  app.set "views", __dirname + "/app/views"
   app.set "view engine", "jade"
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use app.router
   app.use express.static(__dirname + "/public")
+  app.use ss.http.middleware
 
 app.configure "development", ->
   app.use express.errorHandler(
@@ -23,17 +23,18 @@ app.configure "development", ->
 app.configure "production", ->
   app.use express.errorHandler()
 
-app.get "/", routes.index
-app.resource "retrospectives", require("./routes/retrospectives")
+
+app.get "/", require("./app/routes/index").index
+app.resource "retrospectives", require("./app/routes/retrospectives")
+
+app.get "/chat", (req, res) ->
+  res.serveClient "main"
 
 ss.client.define "main",
   view: "app.jade"
   css: [ "libs", "app.styl" ]
   code: [ "libs", "app" ]
   tmpl: "*"
-
-ss.http.route "/chat", (req, res) ->
-  res.serveClient "main"
 
 ss.client.formatters.add require("ss-coffee")
 ss.client.formatters.add require("ss-jade")
