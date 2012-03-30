@@ -1,5 +1,5 @@
 task :default => :test
 
 task :test do
-  exec "mocha test/**/*.coffee"
+  system "mocha test/**/*.coffee"
 end
