@@ -11,7 +11,6 @@ app.configure ->
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use app.router
-  app.use express.static(__dirname + "/public")
   app.use ss.http.middleware
 
 app.configure "development", ->
@@ -40,7 +39,7 @@ ss.client.formatters.add require("ss-coffee")
 ss.client.formatters.add require("ss-jade")
 ss.client.formatters.add require("ss-stylus")
 ss.client.templateEngine.use require("ss-hogan")
-ss.client.packAssets()  if ss.env is "production"
+ss.client.packAssets() if ss.env is "production"
 
 if !module.parent
   server = app.listen 3000
