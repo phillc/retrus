@@ -22,7 +22,6 @@ app.configure "development", ->
 app.configure "production", ->
   app.use express.errorHandler()
 
-
 app.get "/", require("./app/routes/index").index
 app.resource "retrospectives", require("./app/routes/retrospectives")
 

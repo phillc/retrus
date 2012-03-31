@@ -7,4 +7,5 @@ exports.new = (req, res) ->
   res.render "retrospectives/new"
 
 exports.create = (req, res) ->
+  res.redirect "/retrospectives"
 
