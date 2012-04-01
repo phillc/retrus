@@ -2,7 +2,10 @@
 html
   head
     meta(charset="utf-8")
-    title Retrus | #{title}
+    - if(title)
+      title Retrus | #{title}
+    - else
+      title Retrus
     link(rel="stylesheet", href="/bootstrap/css/bootstrap.css")
     link(rel="stylesheet", href="/bootstrap/css/bootstrap-responsive.css")
     link(rel="stylesheet", href="/stylesheets/style.css")

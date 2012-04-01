@@ -1,5 +1,6 @@
 ss = require("socketstream")
 
+connect = require("connect")
 express = require("express")
 require("express-resource")
 
@@ -10,8 +11,11 @@ app.configure ->
   app.set "view engine", "jade"
   app.use express.bodyParser()
   app.use express.methodOverride()
+  app.use connect.logger()
   app.use app.router
   app.use ss.http.middleware
+  app.set 'view options',
+    title: false
 
 app.configure "development", ->
   app.use express.errorHandler(

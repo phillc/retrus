@@ -42,5 +42,6 @@ describe "retrospectives", ->
 
       redisClient.flushdb()
       routes.create(req, res)
+    it "should render new on errors"
 
 
