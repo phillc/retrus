@@ -11,14 +11,24 @@ html
     link(rel="stylesheet", href="/stylesheets/style.css")
     //if lt IE 9
       script(src="http://html5shim.googlecode.com/svn/trunk/html5.js")
+    script(src="/js/jquery-1.7.2.js")
+    script(src="/bootstrap/js/bootstrap.js")
   body
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
-          a.brand(href="#") Retrus
+          a.brand(href="/") Retrus
           ul.nav
             li
-              a(href="#") Home
+              a(href="/") Home
+            li.dropdown
+              a.dropdown-toggle(href="#", data-toggle="dropdown") Retrospective
+                b.caret
+              ul.dropdown-menu
+                li
+                  a(href="/retrospectives") List
+                li
+                  a(href="/retrospectives/new") New
     .container-fluid
       != body
 
