@@ -1,4 +1,4 @@
-form(class="form-horizontal")
+form.form-horizontal(action="/retrospectives", method="post")
   fieldset
     legend Create a new retrospective
     div.control-group
@@ -10,7 +10,7 @@ form(class="form-horizontal")
       label.control-label(for="retrospective_private") Private?
       .controls
         label.checkbox
-          input(type="checkbox", name="retrospective[private]", id="retrospective_private")
+          input(type="checkbox", name="retrospective[private]", value="1", id="retrospective_private")
           span.help-inline Check to hide this from the main list
     div.form-actions
       button.btn.btn-primary(type="submit") Save Changes

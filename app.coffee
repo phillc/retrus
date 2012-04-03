@@ -3,6 +3,9 @@ ss = require("socketstream")
 connect = require("connect")
 express = require("express")
 require("express-resource")
+nohm = require('nohm').Nohm
+redisClient = require('redis').createClient()
+nohm.setClient(redisClient)
 
 app = module.exports = express.createServer()
 

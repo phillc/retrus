@@ -4,33 +4,34 @@ routes = require "../../app/routes/retrospectives"
 require "should"
 
 describe "retrospectives", ->
-  req =
-    params: {}
-    body: {}
-  res =
-    redirect: (route) ->
-    render: (view, vars) ->
+  beforeEach ->
+    @req =
+      params: {}
+      body: {}
+    @res =
+      redirect: (route) ->
+      render: (view, vars) ->
 
   describe "index", ->
     it "should display index with no retrospectives", (done) ->
-      res.render = (view, vars) ->
+      @res.render = (view, vars) ->
         view.should.equal "retrospectives/index"
         vars.title.should.equal "Retrospectives"
         vars.retrospectives.should.eql []
         done()
-      routes.index(req, res)
+      routes.index(@req, @res)
   describe "new", ->
     it "should display new", (done) ->
-      res.render = (view, vars) ->
+      @res.render = (view, vars) ->
         view.should.equal "retrospectives/new"
         done()
-      routes.new(req, res)
+      routes.new(@req, @res)
   describe "create", ->
     it "should create a retrospective then redirect", (done) ->
       retrospectiveName = "Created retro"
-      req.params.retrospective = {}
-      req.params.retrospective.name = retrospectiveName
-      res.redirect = (route) ->
+      @req.body.retrospective = {}
+      @req.body.retrospective.name = retrospectiveName
+      @res.redirect = (route) ->
         route.should.equal "/retrospectives"
 
         Retrospective.find (err, ids) ->
@@ -41,7 +42,16 @@ describe "retrospectives", ->
             done()
 
       redisClient.flushdb()
-      routes.create(req, res)
-    it "should render new on errors"
+      routes.create(@req, @res)
+    it "should render new on errors", (done) ->
+      @res.render = (view, vars) ->
+        view.should.equal "retrospectives/new"
+        vars.should.eql name: ["notEmpty"]
+
+        Retrospective.find (err, ids) ->
+          ids.should.have.length 0
+          done()
+      redisClient.flushdb()
+      routes.create(@req, @res)
 
 
