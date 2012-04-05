@@ -5,5 +5,5 @@ task :server do
 end
 
 task :test do
-  system "./node_modules/mocha/bin/mocha test/**/*.coffee"
+  system "./node_modules/mocha/bin/mocha test/**/*test.coffee"
 end

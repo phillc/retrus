@@ -20,6 +20,15 @@ describe "retrospectives", ->
         vars.retrospectives.should.eql []
         done()
       routes.index(@req, @res)
+
+    it "should display index with retrospectives", (done) ->
+      new Retrospective.property(name: "foo").save (err) ->
+        should.not.exist(err)
+        @res.render = (view, vars) ->
+          vars.retrospectives.should.eql [{name: "foo"}]
+          done()
+        routes.index(@req, @res)
+
   describe "new", ->
     it "should display new", (done) ->
       @res.render = (view, vars) ->
