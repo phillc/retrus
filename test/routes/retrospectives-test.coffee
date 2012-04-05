@@ -3,7 +3,7 @@ Retrospective = require("../../app/models").Retrospective
 routes = require "../../app/routes/retrospectives"
 require "should"
 
-describe "retrospectives", ->
+describe "route retrospectives", ->
   beforeEach ->
     @req =
       params: {}
@@ -35,6 +35,7 @@ describe "retrospectives", ->
         view.should.equal "retrospectives/new"
         done()
       routes.new(@req, @res)
+
   describe "create", ->
     it "should create a retrospective then redirect", (done) ->
       retrospectiveName = "Created retro"

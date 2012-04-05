@@ -7,7 +7,7 @@ nohm.setPrefix('retrus')
 should = require "should"
 Retrospective = require("../../app/models").Retrospective
 
-describe "Retrospective", ->
+describe "model Retrospective", ->
   before ->
     redisClient.flushdb()
 

@@ -1,7 +1,12 @@
 request = require "../support/http"
 app = require "../../app"
 
-describe "retrospectives", ->
+describe "integration retrospectives", ->
   describe "index", ->
     it "should display index with no retrospectives", (done) ->
-      request(app())
+      request(app).
+        get("/").
+        end (res) ->
+          console.log res
+          res.should.have.status 200
+          done()
