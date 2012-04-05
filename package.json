@@ -6,7 +6,7 @@
   , "dependencies": {
       "coffee-script": ">= 1.2.0"
     , "connect": ">= 2.0.3"
-    , "express": "2.5.8"
+    , "express": "git://github.com/visionmedia/express.git"
     , "express-resource": "0.2.4"
     , "jade": ">= 0.0.1"
     , "nohm": ">= 0.9.0-pre2"

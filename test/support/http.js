@@ -4,7 +4,7 @@
  */
 
 var EventEmitter = require('events').EventEmitter
-  , methods = require('../../').methods
+  , methods = require('express').methods
   , http = require('http');
 
 module.exports = request;
