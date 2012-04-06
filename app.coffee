@@ -17,8 +17,7 @@ app.configure ->
   app.use connect.logger()
   app.use app.router
   app.use ss.http.middleware
-  app.set 'view options',
-    title: false
+  app.locals.title = false
 
 app.configure "development", ->
   app.use express.errorHandler(
