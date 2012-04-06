@@ -1,7 +1,7 @@
 redisClient = require('redis').createClient()
 Retrospective = require("../../app/models").Retrospective
 routes = require "../../app/routes/retrospectives"
-require "should"
+should = require "should"
 
 describe "route retrospectives", ->
   beforeEach ->
@@ -13,6 +13,9 @@ describe "route retrospectives", ->
       render: (view, vars) ->
 
   describe "index", ->
+    beforeEach ->
+      redisClient.flushdb()
+
     it "should display index with no retrospectives", (done) ->
       @res.render = (view, vars) ->
         view.should.equal "retrospectives/index"
@@ -22,12 +25,18 @@ describe "route retrospectives", ->
       routes.index(@req, @res)
 
     it "should display index with retrospectives", (done) ->
-      new Retrospective.property(name: "foo").save (err) ->
+      res = @res
+      req = @req
+
+      retrospective = new Retrospective
+      retrospective.property(name: "foo")
+      retrospective.save (err) ->
         should.not.exist(err)
-        @res.render = (view, vars) ->
-          vars.retrospectives.should.eql [{name: "foo"}]
+        res.render = (view, vars) ->
+          vars.retrospectives.should.have.length 1
+          vars.retrospectives[0].property("name").should.eql "foo"
           done()
-        routes.index(@req, @res)
+        routes.index(req, res)
 
   describe "new", ->
     it "should display new", (done) ->

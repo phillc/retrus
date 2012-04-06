@@ -7,6 +7,5 @@ describe "integration retrospectives", ->
       request(app).
         get("/").
         end (res) ->
-          console.log res
           res.should.have.status 200
           done()
