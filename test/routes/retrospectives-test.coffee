@@ -51,11 +51,11 @@ describe "route retrospectives", ->
       @req.body.retrospective = {}
       @req.body.retrospective.name = retrospectiveName
       @res.redirect = (route) ->
-        route.should.equal "/retrospectives"
-
         Retrospective.find (err, ids) ->
           ids.should.have.length 1
           retrospectiveId = ids[0]
+          route.should.equal "/retrospectives/" + retrospectiveId + "/facilitator"
+
           new Retrospective.load retrospectiveId, (err, properties) ->
             properties.name.should.equal retrospectiveName
             done()

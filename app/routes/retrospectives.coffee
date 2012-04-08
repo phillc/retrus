@@ -40,5 +40,5 @@ exports.create = (req, res) ->
           errors[property] = values
       res.render "retrospectives/new", { errors: errors }
     else
-      res.redirect "/retrospectives"
+      res.redirect "/retrospectives/" + retrospective.id + "/facilitator"
 
