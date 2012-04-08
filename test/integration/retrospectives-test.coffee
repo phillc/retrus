@@ -9,3 +9,19 @@ describe "integration retrospectives", ->
         end (res) ->
           res.should.have.status 200
           done()
+
+  describe "show", ->
+    it "should display with no problems", (done) ->
+      request(app).
+        get("/retrospectives/1").
+        end (res) ->
+          res.should.have.status 200
+          done()
+
+  describe "show for facilitators", ->
+    it "should display with no problems", (done) ->
+      request(app).
+        get("/retrospectives/1/facilitator").
+        end (res) ->
+          res.should.have.status 200
+          done()

@@ -34,7 +34,19 @@ app.get "/", require("./app/routes/index").index
 app.get "/retrospectives", retrospectivesRoute.index
 app.get "/retrospectives/new", retrospectivesRoute.new
 app.post "/retrospectives", retrospectivesRoute.create
+app.get "/retrospectives/:id/facilitator", (req, res) ->
+  res.serveClient "retrospective"
 
+app.get "/retrospectives/:id", (req, res) ->
+  res.serveClient "retrospective"
+
+ss.client.define "retrospective",
+  view: "retrospective.jade"
+  css: [ "libs", "retrospective.styl" ]
+  code: [ "libs", "app" ]
+  tmpl: "*"
+
+###### for reference
 app.get "/chat", (req, res) ->
   res.serveClient "main"
 
@@ -43,6 +55,7 @@ ss.client.define "main",
   css: [ "libs", "app.styl" ]
   code: [ "libs", "app" ]
   tmpl: "*"
+######
 
 ss.client.formatters.add require("ss-coffee")
 ss.client.formatters.add require("ss-jade")
