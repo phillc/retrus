@@ -2,6 +2,7 @@ jade = require "jade"
 jsdom = require "jsdom"
 fs = require "fs"
 should = require "should"
+Retrospective = require("../../app/models").Retrospective
 
 view = (path) ->
   __dirname + '/../../app/views/' + path + '.jade'
@@ -14,7 +15,7 @@ render = (path, vars, callbackfn) ->
     should.not.exist errors
     jsdom.env
       html: html
-      scripts: []
+      scripts: [__dirname + '/../../client/static/js/jquery-1.7.2.js']
       done: (errors, window) ->
         should.not.exist errors
         callbackfn window.$
@@ -22,9 +23,13 @@ render = (path, vars, callbackfn) ->
 describe "view retrospectives", ->
   describe "index", ->
     it "should list something", (done) ->
-      vars = { retrospectives: [{}] }
+
+      retrospective = new Retrospective
+      retrospective.property
+        name: "Foo bar"
+      vars = { retrospectives: [retrospective] }
 
       render "retrospectives/index", vars, ($) ->
-        # window.$("retrospectives").length.should.be 2
+        $("#retrospectives-list li").length.should.eql(1)
         done()
 

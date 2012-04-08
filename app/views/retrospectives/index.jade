@@ -2,3 +2,10 @@ extends ../layout
 
 block content
   a(href="/retrospectives/new") New retrospective
+
+  if retrospectives.length > 0
+    ul#retrospectives-list
+      - each retrospective in retrospectives
+        li
+          != retrospective.prop("name")
+

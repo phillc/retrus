@@ -18,6 +18,7 @@ app.configure ->
   app.use app.router
   app.use ss.http.middleware
   app.locals.title = false
+  app.locals.pretty = true
 
 app.configure "development", ->
   app.use express.errorHandler(
