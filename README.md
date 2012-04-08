@@ -1,4 +1,6 @@
-# Welcome to your new realtime app
+Retr.us
+
+Intended to aid in distributed retrospectives
 
 Copyright 2012 Phillip Campbell
 
