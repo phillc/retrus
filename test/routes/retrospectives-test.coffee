@@ -62,10 +62,11 @@ describe "route retrospectives", ->
 
       redisClient.flushdb()
       routes.create(@req, @res)
+
     it "should render new on errors", (done) ->
       @res.render = (view, vars) ->
         view.should.equal "retrospectives/new"
-        vars.should.eql name: ["notEmpty"]
+        vars.should.eql errors: { name: ["notEmpty"] }
 
         Retrospective.find (err, ids) ->
           ids.should.have.length 0

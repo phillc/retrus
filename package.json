@@ -16,7 +16,8 @@
     , "ss-stylus": "0.1.x"
   }
   , "devDependencies": {
-      "mocha": ">= 1.0.0"
+      "jsdom": ">= 0.2.13"
+    , "mocha": ">= 1.0.0"
     , "nodemon": ">= 0.6.12"
     , "should": ">= 0.6.0"
   }

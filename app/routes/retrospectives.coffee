@@ -38,7 +38,7 @@ exports.create = (req, res) ->
       for property, values of retrospective.errors
         if values.length > 0
           errors[property] = values
-      res.render "retrospectives/new", errors
+      res.render "retrospectives/new", { errors: errors }
     else
       res.redirect "/retrospectives"
 
