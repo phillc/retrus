@@ -8,7 +8,6 @@ view = (path) ->
   __dirname + '/../../app/views/' + path + '.jade'
 
 render = (path, vars, callbackfn) ->
-  vars.title ?= "Default title"
   vars.pretty = true
 
   jade.renderFile view(path), vars, (errors, html) ->

@@ -17,7 +17,6 @@ app.configure ->
   app.use connect.logger()
   app.use app.router
   app.use ss.http.middleware
-  app.locals.title = false
   app.locals.pretty = true
 
 app.configure "development", ->
