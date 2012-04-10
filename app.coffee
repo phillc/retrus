@@ -63,8 +63,8 @@ ss.client.templateEngine.use require("ss-hogan")
 ss.client.packAssets() if ss.env is "production"
 
 if !module.parent
-  server = app.listen 3000
-  console.log "Express server listening on port 3000"
+  server = app.listen 4000
+  console.log "Express server listening on port 4000"
   ss.start server
   console.log "Socket stream started"
 
