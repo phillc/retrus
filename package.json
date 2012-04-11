@@ -8,7 +8,7 @@
     , "connect": ">= 2.0.3"
     , "express": "git://github.com/visionmedia/express.git"
     , "jade": "0.22.1"
-    , "nohm": ">= 0.9.0-pre2"
+    , "mongoose": "2.5.10"
     , "redis": ">= 0.7.1"
     , "ss-coffee": "0.1.x"
     , "ss-jade": "0.1.x"
