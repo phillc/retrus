@@ -2,12 +2,8 @@ ss = require("socketstream")
 
 connect = require("connect")
 express = require("express")
-nohm = require('nohm').Nohm
-redisClient = require('redis').createClient()
-nohm.setClient(redisClient)
 
 app = module.exports = express()
-retrospectivesRoute = require("./app/routes/retrospectives")
 
 app.configure ->
   app.set "views", __dirname + "/app/views"
@@ -30,6 +26,7 @@ app.configure "production", ->
 
 app.get "/", require("./app/routes/index").index
 
+retrospectivesRoute = require("./app/routes/retrospectives")
 app.get "/retrospectives", retrospectivesRoute.index
 app.get "/retrospectives/new", retrospectivesRoute.new
 app.post "/retrospectives", retrospectivesRoute.create

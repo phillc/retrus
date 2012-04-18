@@ -2,7 +2,7 @@ jade = require "jade"
 jsdom = require "jsdom"
 fs = require "fs"
 should = require "should"
-Retrospective = require("../../app/models").Retrospective
+Retrospective = require("../../models").Retrospective
 
 view = (path) ->
   __dirname + '/../../app/views/' + path + '.jade'
@@ -22,10 +22,7 @@ render = (path, vars, callbackfn) ->
 describe "view retrospectives", ->
   describe "index", ->
     it "should list something", (done) ->
-
-      retrospective = new Retrospective
-      retrospective.property
-        name: "Foo bar"
+      retrospective = new Retrospective name: "Foo bar"
       vars = { retrospectives: [retrospective] }
 
       render "retrospectives/index", vars, ($) ->

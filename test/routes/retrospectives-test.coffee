@@ -1,5 +1,4 @@
-redisClient = require('redis').createClient()
-Retrospective = require("../../app/models").Retrospective
+Retrospective = require("../../models").Retrospective
 routes = require "../../app/routes/retrospectives"
 should = require "should"
 
@@ -11,11 +10,9 @@ describe "route retrospectives", ->
     @res =
       redirect: (route) ->
       render: (view, vars) ->
+    Retrospective.collection.drop()
 
   describe "index", ->
-    beforeEach ->
-      redisClient.flushdb()
-
     it "should display index with no retrospectives", (done) ->
       @res.render = (view, vars) ->
         view.should.equal "retrospectives/index"
@@ -28,14 +25,14 @@ describe "route retrospectives", ->
       res = @res
       req = @req
 
-      retrospective = new Retrospective
-      retrospective.property(name: "foo")
+      retrospective = new Retrospective name: "foo"
       retrospective.save (err) ->
         should.not.exist(err)
         res.render = (view, vars) ->
           vars.retrospectives.should.have.length 1
-          vars.retrospectives[0].property("name").should.eql "foo"
+          vars.retrospectives[0].name.should.eql "foo"
           done()
+
         routes.index(req, res)
 
   describe "new", ->
@@ -43,6 +40,7 @@ describe "route retrospectives", ->
       @res.render = (view, vars) ->
         view.should.equal "retrospectives/new"
         done()
+
       routes.new(@req, @res)
 
   describe "create", ->
@@ -51,27 +49,23 @@ describe "route retrospectives", ->
       @req.body.retrospective = {}
       @req.body.retrospective.name = retrospectiveName
       @res.redirect = (route) ->
-        Retrospective.find (err, ids) ->
-          ids.should.have.length 1
-          retrospectiveId = ids[0]
-          route.should.equal "/retrospectives/" + retrospectiveId + "/facilitator"
+        Retrospective.findOne (err, doc) ->
+          should.not.exist(err)
+          route.should.equal "/retrospectives/" + doc._id + "/facilitator"
+          doc.name.should.equal retrospectiveName
+          done()
 
-          new Retrospective.load retrospectiveId, (err, properties) ->
-            properties.name.should.equal retrospectiveName
-            done()
-
-      redisClient.flushdb()
       routes.create(@req, @res)
 
     it "should render new on errors", (done) ->
       @res.render = (view, vars) ->
         view.should.equal "retrospectives/new"
-        vars.should.eql errors: { name: ["notEmpty"] }
+        vars.errors.errors.name.type.should.eql "required"
 
-        Retrospective.find (err, ids) ->
-          ids.should.have.length 0
+        Retrospective.findOne (err, doc) ->
+          should.not.exist(err)
           done()
-      redisClient.flushdb()
+
       routes.create(@req, @res)
 
 
