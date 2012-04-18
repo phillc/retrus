@@ -9,7 +9,6 @@
     , "express": "git://github.com/visionmedia/express.git"
     , "jade": "0.22.1"
     , "mongoose": "2.5.10"
-    , "redis": ">= 0.7.1"
     , "ss-coffee": "0.1.x"
     , "ss-jade": "0.1.x"
     , "ss-hogan": "0.1.x"
