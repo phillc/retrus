@@ -8,4 +8,7 @@ block content
       - each retrospective in retrospectives
         li
           != retrospective.name
+          a(href="/retrospectives/" + retrospective._id) Participant
+          a(href="/retrospectives/" + retrospective._id + "/facilitator") Facilitator
+
 
