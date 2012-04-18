@@ -30,6 +30,7 @@ retrospectivesRoute = require("./app/routes/retrospectives")
 app.get "/retrospectives", retrospectivesRoute.index
 app.get "/retrospectives/new", retrospectivesRoute.new
 app.post "/retrospectives", retrospectivesRoute.create
+
 app.get "/retrospectives/:id/facilitator", (req, res) ->
   res.serveClient "retrospective"
 
@@ -38,9 +39,9 @@ app.get "/retrospectives/:id", (req, res) ->
 
 ss.client.define "retrospective",
   view: "retrospective.jade"
-  css: [ "libs", "retrospective.styl" ]
-  code: [ "libs", "app" ]
-  tmpl: "*"
+  css: [ "retrospective.styl" ]
+  code: [ "libs" ]
+  tmpl: [ "restrospective" ]
 
 ###### for reference
 app.get "/chat", (req, res) ->
