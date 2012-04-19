@@ -13,13 +13,10 @@ publicPath = path.join root, 'public'
 staticPages = derby.createStatic root
 
 (module.exports = server = express.createServer())
-  # The express.static middleware can be used instead of gzip.staticGzip
   .use(gzip.staticGzip publicPath, MAX_AGE_ONE_YEAR)
   .use(express.favicon())
-
-  # Uncomment to add form data parsing support
-  # .use(express.bodyParser())
-  # .use(express.methodOverride())
+  .use(express.bodyParser())
+  .use(express.methodOverride())
 
   # Uncomment and supply secret to add Derby session handling
   # Derby session middleware creates req.model and subscribes to _session
@@ -27,13 +24,11 @@ staticPages = derby.createStatic root
   # .use(express.session(secret: '', cookie: MAX_AGE_ONE_YEAR))
   # .use(app.session())
 
-  # Remove to disable dynamic gzipping
   .use(gzip.gzip())
 
   # The router method creates an express middleware from the app's routes
   .use(app.router())
   .use(server.router)
-
 
 ## ERROR HANDLING ##
 
@@ -52,6 +47,12 @@ server.error (err, req, res) ->
 
 
 ## SERVER ONLY ROUTES ##
+
+server.get "/", require("./routes/index").index
+retrospectivesRoute = require("./routes/retrospectives")
+server.get "/retrospectives", retrospectivesRoute.index
+server.get "/retrospectives/new", retrospectivesRoute.new
+server.post "/retrospectives", retrospectivesRoute.create
 
 server.all '*', (req) ->
   throw "404: #{req.url}"

@@ -1,4 +1,4 @@
-Retrospective = require("../../models").Retrospective
+# Retrospective = require("../../models").Retrospective
 exports.index = (req, res) ->
   Retrospective.find (err, docs) ->
     res.render "retrospectives/index",
