@@ -22,113 +22,11 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
-  <script src="/js/jquery-1.7.2.js"></script>
   <script src="/bootstrap/js/bootstrap.js"></script>
 </head>
 
 <body>
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container-fluid">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar">foo</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a class="brand" href="#">Retrus</a>
-        <div class="nav-collapse">
-          <ul class="nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Retrospective
-                <b class="caret" />
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="#about">List</a></li>
-                <li><a href="#contact">New</a></li>
-              </ul>
-            </li><!--/.dropdown -->
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="hero-unit">
-        <h1>Easier communication</h1>
-        <p>A suite of tools aimed at making distributed conversations better.</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="span4">
-        <h2>Retrospective Wall</h2>
-        <p>A tool for distributed collaboration</p>
-      </div>
-      <div class="span4">
-        <h2>Conversation Bar</h2>
-        <p>Gauge your conversations</p>
-      </div>
-      <div class="span4">
-        <h2>Get your own!</h2>
-        <p>Learn how to deploy your own instance</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="span4">
-        <form class="well">
-          <legend>Create one now!</legend>
-          <fieldset>
-            <div class="control-group">
-              <label class="control-label" for="new-retrospective-name">Name of your retrospective</label>
-              <div class="controls">
-                <input type="text" class="span3" id="new-retrospective-name">
-              </div>
-            </div>
-          </fieldset>
-          <p><a class="btn btn-primary" href="#">Start a retrospective &raquo;</a></p>
-        </form>
-      </div>
-      <div class="span4">
-        <form class="well">
-          <legend>Create one now!</legend>
-          <fieldset>
-            <div class="control-group">
-              <label class="control-label" for="new-guage-name">Name of your conversation</label>
-              <div class="controls">
-                <input type="text" class="span3" id="new-guage-name">
-              </div>
-            </div>
-          </fieldset>
-          <p><a class="btn btn-primary" href="#">Begin a conversation &raquo;</a></p>
-        </form>
-      </div>
-      <div class="span4">
-        <p><a class="btn" href="#">Go to documentation &raquo;</a></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="span4">
-        <div id="retrospectives-list" class="well sidebar-nav">
-          {{> retrospectives_list }}
-        </div>
-      </div>
-    </div>
-
-    <hr>
-
-    <footer>
-      <p>&copy; Retrus 2012</p>
-    </footer>
-
-  </div><!--/.fluid-container-->
+  {{> navigation }}
+  {{> home }}
 </body>
 
-<template name="retrospectives_list">
-  <ul class="nav nav-list">
-    <li class="nav-header">Join a retrospective:</li>
-    {{#each retrospectives}}
-      <li><a href="#{{_id}}">{{name}}</a></li>
-    {{/each}}
-  </ul>
-</template>

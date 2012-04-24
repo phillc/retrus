@@ -1,0 +1,85 @@
+<template name="home">
+  {{#if show}}
+  <div class="container">
+    <div class="row">
+      <div class="hero-unit">
+        <h1>Easier communication</h1>
+        <p>A suite of tools aimed at making distributed conversations better.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span4">
+        <h2>Retrospective Wall</h2>
+        <p>A tool for distributed collaboration</p>
+      </div>
+      <div class="span4">
+        <h2>Conversation Bar</h2>
+        <p>Gauge your conversations</p>
+      </div>
+      <div class="span4">
+        <h2>Get your own!</h2>
+        <p>Learn how to deploy your own instance</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span4">
+        {{> createRetrospective }}
+      </div>
+      <div class="span4">
+        <form class="well" action="javascript:void(0)">
+          <legend>Create one now!</legend>
+          <fieldset>
+            <div class="control-group">
+              <label class="control-label" for="new-guage-name">Name of your conversation</label>
+              <div class="controls">
+                <input type="text" class="span3" id="new-guage-name">
+              </div>
+            </div>
+          </fieldset>
+          <button class="btn btn-primary">Begin a conversation &raquo;</button>
+        </form>
+      </div>
+      <div class="span4">
+        <p><a class="btn" href="#">Go to documentation &raquo;</a></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span4">
+        <div id="retrospectives-list" class="well sidebar-nav">
+          {{> retrospectives_list }}
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <footer>
+      <p>&copy; Retrus 2012</p>
+    </footer>
+  </div>
+  {{/if}}
+</template>
+
+<template name="createRetrospective">
+  <form class="well" action="javascript:void(0)">
+    <legend>Create one now!</legend>
+    <fieldset>
+      <div class="control-group">
+        <label class="control-label" for="new-retrospective-name">Name of your retrospective</label>
+        <div class="controls">
+          <input type="text" class="span3" id="new-retrospective-name">
+        </div>
+      </div>
+    </fieldset>
+    <button class="btn btn-primary">Start a retrospective &raquo;</button>
+  </form>
+</template>
+
+<template name="retrospectives_list">
+  <ul class="nav nav-list">
+    <li class="nav-header">Join a retrospective:</li>
+    {{#each retrospectives}}
+      <li><a href="#{{_id}}">{{name}}</a></li>
+    {{/each}}
+  </ul>
+</template>
+

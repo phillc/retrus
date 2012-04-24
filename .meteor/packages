@@ -5,3 +5,5 @@
 
 coffeescript
 backbone
+underscore
+jquery
