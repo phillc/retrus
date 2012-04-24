@@ -1,5 +1,5 @@
 Retrospectives = new Meteor.Collection("retrospectives")
-Sections = new Meteor.Collection("sections")
+this.Sections = new Meteor.Collection("sections")
 
 Meteor.subscribe 'retrospectives', ->
 

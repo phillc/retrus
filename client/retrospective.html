@@ -2,29 +2,40 @@
   <div class="container-fluid">
     <div class="row-fluid">
       {{#if facilitator}}
-      {{> retrospectiveFacilitator }}
-      <div class="span9">
-        {{> retrospectiveBoard }}
-      </div>
+        <div class="span3">
+          {{> retrospectiveFacilitator }}
+        </div>
+        <div class="span9">
+          {{> retrospectiveBoard }}
+        </div>
       {{else}}
-      <div class="span12">
-        {{> retrospectiveBoard }}
-      </div>
+        <div class="span12">
+          {{> retrospectiveBoard }}
+        </div>
       {{/if}}
     </div>
   </div>
 </template>
 
 <template name="retrospectiveFacilitator">
-  <div class="span3">
-    <div class="well sidebar-nav">
-      <ul class="nav nav-list">
-        <li><a href="#">foo</a></li>
-        <li><a href="#">foo</a></li>
-      </ul>
-    </div>
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li><a href="#">foo</a></li>
+      <li><a href="#">foo</a></li>
+    </ul>
   </div>
+  {{> retrospectiveCreateSection }}
+</template>
+
+<template name="retrospectiveCreateSection">
+  <form class="well form-inline" action="javascript:void(0)">
+    <input id="new-section-name" type="text" class="input-medium" placeholder="Section Name">
+    <button type="submit" class="btn">Create Section</button>
+  </form>
 </template>
 
 <template name="retrospectiveBoard">
+  {{#each sections}}
+    {{name}}
+  {{/each}}
 </template>
