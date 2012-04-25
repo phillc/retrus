@@ -1,41 +1,71 @@
 <template name="retrospective">
-  <div class="container-fluid">
-    <div class="row-fluid">
-      {{#if facilitator}}
-        <div class="span3">
-          {{> retrospectiveFacilitator }}
-        </div>
-        <div class="span9">
-          {{> retrospectiveBoard }}
-        </div>
-      {{else}}
-        <div class="span12">
-          {{> retrospectiveBoard }}
-        </div>
-      {{/if}}
+  <div class="container">
+    {{> retrospectiveTags }}
+    {{> retrospectiveBoard }}
+  </div>
+</template>
+
+<template name="retrospectiveTags">
+  <div class="row">
+    <div class="span12">
+      <div class="well">
+        Show:
+        <button class="btn btn-primary" data-toggle="button">Something</button>
+        <button class="btn btn-primary" data-toggle="button">Another</button>
+        <button class="btn btn-primary" data-toggle="button">Tag</button>
+      </div>
     </div>
   </div>
 </template>
 
-<template name="retrospectiveFacilitator">
-  <div class="well sidebar-nav">
-    <ul class="nav nav-list">
-      <li><a href="#">foo</a></li>
-      <li><a href="#">foo</a></li>
-    </ul>
+<template name="retrospectiveBoard">
+  <ul class="thumbnails">
+  {{#each sections}}
+  {{> retrospectiveSection}}
+  {{/each}}
   </div>
-  {{> retrospectiveCreateSection }}
+</template>
+
+<template name="retrospectiveSection">
+  <li class="span4 retrospective-section">
+    <h3>Section: {{name}}</h3>
+    <ul class="thumbnails">
+      <li class="span2">
+        <div class="thumbnail">
+          I think something is not up
+        </div>
+      </li>
+      <li class="span2">
+        <div class="thumbnail">
+          I think something is up
+        </div>
+      </li>
+    </ul>
+  </li>
+</template>
+
+<template name="retrospectiveItem">
+  <li class="span3">
+    <div class="thumbnail">
+      {{name}}
+      <div class="caption">
+        <div class="btn-group">
+        <a href="#" class="btn btn-primary">Agree (1)</a>
+        <a href="#" class="btn">Disagree (0)</a>
+      </div>
+      </div>
+    </div>
+  </li>
+</template>
+
+<template name="retrospectiveFacilitatorNav">
+  {{#if show}}
+  {{> retrospectiveCreateSection}}
+  {{/if}}
 </template>
 
 <template name="retrospectiveCreateSection">
-  <form class="well form-inline" action="javascript:void(0)">
-    <input id="new-section-name" type="text" class="input-medium" placeholder="Section Name">
-    <button type="submit" class="btn">Create Section</button>
+  <form class="navbar-search" action="javascript:void(0)">
+    <input id="new-section-name" type="text" class="search-query" placeholder="Add Section">
   </form>
-</template>
-
-<template name="retrospectiveBoard">
-  {{#each sections}}
-    {{name}}
-  {{/each}}
 </template>

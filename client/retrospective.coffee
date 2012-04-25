@@ -3,7 +3,7 @@ Meteor.autosubscribe ->
   if retrospective_id
     Meteor.subscribe 'sections', retrospective_id
 
-Template.retrospective.facilitator = ->
+Template.retrospectiveFacilitatorNav.show = ->
   Session.get 'facilitating'
 
 Template.retrospectiveCreateSection.events =
