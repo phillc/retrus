@@ -31,6 +31,8 @@ AppRouter = Backbone.Router.extend
     Session.set "facilitating", false
     Session.set "currentRetrospective", retrospective_id
 
+  setHome: ->
+    @navigate "", true
   setRetrospective: (retrospective_id) ->
     @navigate "retrospectives/#{retrospective_id}/facilitator", true
 
