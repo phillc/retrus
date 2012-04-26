@@ -1,8 +1,10 @@
 <template name="retrospective">
+  {{#if show}}
   <div class="container">
     {{> retrospectiveTags }}
     {{> retrospectiveBoard }}
   </div>
+  {{/if}}
 </template>
 
 <template name="retrospectiveTags">

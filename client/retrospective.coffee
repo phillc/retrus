@@ -11,6 +11,9 @@ Meteor.autosubscribe ->
   sections.forEach (section) ->
     Meteor.subscribe 'items', section._id
 
+Template.retrospective.show = ->
+  !!Session.get 'currentRetrospective'
+
 Template.retrospectiveFacilitatorNav.show = ->
   Session.get 'facilitating'
 
@@ -34,7 +37,7 @@ Template.retrospectiveCreateItem.events =
     Items.insert
       body: $("#new-item-name-#{@_id}").val()
       section_id: @_id
-      agree: 0
+      agree: 1
       disagree: 0
     $("#new-item-modal-#{@_id}").modal('hide')
     $("#new-item-name-#{@_id}").val("")
