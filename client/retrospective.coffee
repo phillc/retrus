@@ -39,3 +39,8 @@ Template.retrospectiveCreateItem.events =
     $("#new-item-modal-#{@_id}").modal('hide')
     $("#new-item-name-#{@_id}").val("")
 
+Template.retrospectiveItem.enable_tooltips = ->
+  Meteor.defer ->
+    $('[rel=tooltip]').tooltip()
+  ''
+
