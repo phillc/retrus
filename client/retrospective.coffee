@@ -25,16 +25,12 @@ Template.retrospectiveBoard.sections = ->
   Sections.find
     retrospective_id: Session.get 'currentRetrospective'
 
-# Template.retrospectiveSection.events = ->
-#   "button click": 
-
 Template.retrospectiveSection.items = ->
   Items.find
     section_id: @_id
 
 Template.retrospectiveCreateItem.events =
-  submit: ->
-    console.log("SUBMITTING:")
+  "submit form": ->
     Items.insert
       body: $("#new-item-name-#{@_id}").val()
       section_id: @_id
