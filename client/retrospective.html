@@ -64,12 +64,14 @@
 <template name="retrospectiveItem">
   <li class="span2">
     <div class="thumbnail">
-      {{body}}
-      <div class="caption">
+      <blockquote>
         <p>
-          <a href="#" class="btn btn-primary">Agree (1)</a>
-          <a href="#" class="btn">Disagree (0)</a>
+          {{body}}
         </p>
+      </blockquote>
+      <div class="caption" style="text-align: right;">
+        <a href="#" rel="tooltip" title="agree" class="btn btn-primary btn-small"><i class="icon-thumbs-up icon-white"></i> ({{agree}})</a>
+        <a href="#" class="btn btn-small"><i class="icon-thumbs-down"></i> ({{disagree}})</a>
       </div>
     </div>
   </li>

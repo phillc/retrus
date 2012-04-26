@@ -34,7 +34,8 @@ Template.retrospectiveCreateItem.events =
     Items.insert
       body: $("#new-item-name-#{@_id}").val()
       section_id: @_id
+      agree: 0
+      disagree: 0
     $("#new-item-modal-#{@_id}").modal('hide')
     $("#new-item-name-#{@_id}").val("")
-
 
