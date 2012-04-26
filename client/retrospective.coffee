@@ -1,5 +1,5 @@
-Sections = new Meteor.Collection("sections")
-Items = new Meteor.Collection("items")
+this.Sections = new Meteor.Collection("sections")
+this.Items = new Meteor.Collection("items")
 
 Meteor.autosubscribe ->
   retrospective_id = Session.get 'currentRetrospective'
