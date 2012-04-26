@@ -21,15 +21,17 @@
 </template>
 
 <template name="retrospectiveBoard">
-  <ul class="thumbnails">
-  {{#each sections}}
-  {{> retrospectiveSection}}
-  {{/each}}
+  {{#each sectionGroups}}
+  <div class="row">
+    {{#each sections}}
+      {{> retrospectiveSection}}
+    {{/each}}
   </div>
+  {{/each}}
 </template>
 
 <template name="retrospectiveSection">
-  <li class="span4 retrospective-section">
+  <div class="span4 retrospective-section">
     {{> retrospectiveCreateItem}}
     <h3>
       <a href="#new-item-modal-{{_id}}" class="btn btn-success btn-small" data-toggle="modal">
@@ -42,7 +44,7 @@
       {{> retrospectiveItem}}
       {{/each}}
     </ul>
-  </li>
+  </div>
 </template>
 
 <template name="retrospectiveCreateItem">

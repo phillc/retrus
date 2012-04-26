@@ -24,9 +24,10 @@ Template.retrospectiveCreateSection.events =
       retrospective_id: Session.get 'currentRetrospective'
     $("#new-section-name").val("")
 
-Template.retrospectiveBoard.sections = ->
-  Sections.find
-    retrospective_id: Session.get 'currentRetrospective'
+Template.retrospectiveBoard.sectionGroups = ->
+  retrospective_id = Session.get 'currentRetrospective'
+  sections = Sections.find(retrospective_id: retrospective_id).fetch()
+  {sections: sections.splice(0,3)} while sections.length > 0
 
 Template.retrospectiveSection.items = ->
   Items.find

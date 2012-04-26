@@ -2,7 +2,7 @@ Meteor.startup ->
   if Retrospectives.find().count() == 0
     retrospective1 = Retrospectives.insert
       name: "Try me!!"
-    for name in ["Click Add!", "Other people see the same board", "Facilitators add sections", "Click above to see facilitation view", "How are you doing?"]
+    for name in ["Click Add!", "Other people see this", "Facilitators add sections", "Click facilitation view", "How are you doing?"]
       section_id = Sections.insert
         retrospective_id: retrospective1
         name: name
