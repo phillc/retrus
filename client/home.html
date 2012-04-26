@@ -13,8 +13,8 @@
         <p>A tool for distributed collaboration</p>
       </div>
       <div class="span4">
-        <h2>Conversation Bar</h2>
-        <p>Gauge your conversations</p>
+        <h2>Join a wall now</h2>
+        <p>Enter live conversations</p>
       </div>
       <div class="span4">
         <h2>Get your own!</h2>
@@ -26,19 +26,12 @@
         {{> createRetrospective }}
       </div>
       <div class="span4">
-        <div class="well">
-          Coming soon
-        </div>
-      </div>
-      <div class="span4">
-        <p><a class="btn" href="#">Go to documentation &raquo;</a></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="span4">
         <div id="retrospectives-list" class="well sidebar-nav">
           {{> retrospectives_list }}
         </div>
+      </div>
+      <div class="span4">
+        <p><a class="btn" href="https://github.com/phillc/retrus">Go to documentation &raquo;</a></p>
       </div>
     </div>
 
@@ -67,7 +60,6 @@
 
 <template name="retrospectives_list">
   <ul class="nav nav-list">
-    <li class="nav-header">Join a retrospective:</li>
     {{#each retrospectives}}
       <li><a href="/retrospectives/{{_id}}">{{name}}</a></li>
     {{/each}}
