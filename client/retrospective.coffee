@@ -14,6 +14,10 @@ Meteor.autosubscribe ->
 Template.retrospective.show = ->
   !!Session.get 'currentRetrospective'
 
+Template.retrospectiveHeader.retrospectiveName = ->
+  retrospective_id = Session.get 'currentRetrospective'
+  Retrospectives.findOne(_id: retrospective_id)?.name
+
 Template.retrospectiveFacilitatorNav.currentRetrospective = ->
   Session.get 'currentRetrospective'
 

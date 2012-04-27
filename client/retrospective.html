@@ -1,16 +1,17 @@
 <template name="retrospective">
   {{#if show}}
   <div class="container">
-    {{> retrospectiveTags }}
+    {{> retrospectiveHeader }}
     {{> retrospectiveBoard }}
   </div>
   {{/if}}
 </template>
 
-<template name="retrospectiveTags">
+<template name="retrospectiveHeader">
   <div class="row">
     <div class="span12">
       <div class="well">
+        <strong class="label">{{retrospectiveName}}</strong>
         Show:
         <button class="btn btn-primary" data-toggle="button">Something</button>
         <button class="btn btn-primary" data-toggle="button">Another</button>
