@@ -39,6 +39,12 @@ Template.retrospectiveSection.items = ->
   Items.find
     section_id: @_id
 
+Template.retrospectiveCreateItem.focusOnShow = (anything) ->
+  id = @_id
+  Meteor.defer ->
+    $("#new-item-modal-#{id}").on 'shown', ->
+      $("#new-item-name-#{id}").focus()
+
 Template.retrospectiveCreateItem.events =
   "submit form": ->
     Items.insert
