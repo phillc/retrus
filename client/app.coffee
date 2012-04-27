@@ -12,7 +12,7 @@ Template.createRetrospective.events =
   submit: ->
     id = Retrospectives.insert
       name: $("#new-retrospective-name").val()
-    Router.setRetrospective id
+    Router.setRetrospectiveFacilitator id
 
 AppRouter = Backbone.Router.extend
   routes:
@@ -34,6 +34,8 @@ AppRouter = Backbone.Router.extend
   setHome: ->
     @navigate "", true
   setRetrospective: (retrospective_id) ->
+    @navigate "retrospectives/#{retrospective_id}", true
+  setRetrospectiveFacilitator: (retrospective_id) ->
     @navigate "retrospectives/#{retrospective_id}/facilitator", true
 
 this.Router = new AppRouter

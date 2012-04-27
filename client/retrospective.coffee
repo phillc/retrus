@@ -14,8 +14,14 @@ Meteor.autosubscribe ->
 Template.retrospective.show = ->
   !!Session.get 'currentRetrospective'
 
+Template.retrospectiveFacilitatorNav.currentRetrospective = ->
+  Session.get 'currentRetrospective'
+
 Template.retrospectiveFacilitatorNav.show = ->
-  Session.get 'facilitating'
+  !!Session.get 'currentRetrospective'
+
+Template.retrospectiveFacilitatorNav.isFacilitator = ->
+  !!Session.get 'facilitating'
 
 Template.retrospectiveCreateSection.events =
   submit: ->

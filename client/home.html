@@ -61,7 +61,7 @@
 <template name="retrospectives_list">
   <ul class="nav nav-list">
     {{#each retrospectives}}
-      <li><a href="/retrospectives/{{_id}}">{{name}}</a></li>
+      <li><a href="javascript:Router.setRetrospective('{{_id}}');">{{name}}</a></li>
     {{/each}}
   </ul>
 </template>

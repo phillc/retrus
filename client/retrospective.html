@@ -84,7 +84,16 @@
 
 <template name="retrospectiveFacilitatorNav">
   {{#if show}}
-  {{> retrospectiveCreateSection}}
+    {{#if isFacilitator}}
+      <ul class="nav">
+        <li><a href="javascript:Router.setRetrospective('{{currentRetrospective}}');">Go to Participant view</a></li>
+      </ul>
+      {{> retrospectiveCreateSection}}
+    {{else}}
+      <ul class="nav">
+        <li><a href="javascript:Router.setRetrospectiveFacilitator('{{currentRetrospective}}');">Go to Facilitator view</a></li>
+      </ul>
+    {{/if}}
   {{/if}}
 </template>
 
