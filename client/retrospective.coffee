@@ -65,8 +65,3 @@ Template.retrospectiveItem.events =
   'click .retrospective-disagree': ->
     Items.update { _id: @_id }, { $inc: { disagree: 1 } }
 
-Template.retrospectiveItem.enable_tooltips = ->
-  Meteor.defer ->
-    $('[rel=tooltip]').tooltip()
-  ''
-
