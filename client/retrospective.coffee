@@ -43,7 +43,7 @@ Template.retrospectiveSection.items = ->
   Items.find
     section_id: @_id
 
-Template.retrospectiveCreateItem.focusOnShow = (anything) ->
+Template.retrospectiveCreateItem.focusOnShow = ->
   id = @_id
   Meteor.defer ->
     $("#new-item-modal-#{id}").on 'shown', ->
@@ -65,3 +65,14 @@ Template.retrospectiveItem.events =
   'click .retrospective-disagree': ->
     Items.update { _id: @_id }, { $inc: { disagree: 1 } }
 
+Template.retrospectiveCreateTag.focusOnShow = ->
+  id = @_id
+  Meteor.defer ->
+    $("#new-tag-modal-#{id}").on 'shown', ->
+      $("#new-tag-name-#{id}").focus()
+
+Template.retrospectiveCreateTag.events =
+  "submit form": ->
+    Items.update { _id: @_id }, { $addToSet: { tags: $("#new-tag-name-#{@_id}").val() } }
+    $("#new-tag-modal-#{@_id}").modal('hide')
+    $("#new-tag-name-#{@_id}").val("")

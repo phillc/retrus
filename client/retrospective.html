@@ -12,6 +12,10 @@
     <div class="span12">
       <div class="well">
         <strong class="label">{{retrospectiveName}}</strong>
+        Show:
+        <button class="btn btn-primary" data-toggle="button">Something</button>
+        <button class="btn btn-primary" data-toggle="button">Another</button>
+        <button class="btn btn-primary" data-toggle="button">Tag</button>
       </div>
     </div>
   </div>
@@ -65,18 +69,57 @@
 
 <template name="retrospectiveItem">
   <li class="span2">
+    {{> retrospectiveCreateTag}}
     <div class="thumbnail">
       <blockquote>
         <p>
           {{body}}
         </p>
       </blockquote>
-      <div class="caption" style="text-align: right;">
-        <a href="#" rel="tooltip" title="agree" class="retrospective-agree btn btn-primary btn-small"><i class="icon-thumbs-up icon-white"></i> ({{agree}})</a>
-        <a href="#" rel="tooltip" title="disagree" class="retrospective-disagree btn btn-small"><i class="icon-thumbs-down"></i> ({{disagree}})</a>
+      <div style="text-align: right;">
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-cog"></i>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#new-tag-modal-{{_id}}" data-toggle="modal">Add new tag</a></li>
+              <li class="divider"></li>
+              <li><a href="">Add tag: Foo</a></li>
+              <li class="divider"></li>
+              {{#each tags}}
+                <li><a href="">Remove Tag: {{this}}</a></li>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="btn-group">
+            <a href="#" rel="tooltip" title="disagree" class="retrospective-disagree btn btn-mini"><i class="icon-thumbs-down"></i> {{disagree}}</a>
+            <a href="#" rel="tooltip" title="agree" class="retrospective-agree btn btn-primary btn-mini"><i class="icon-thumbs-up icon-white"></i> {{agree}}</a>
+          </div>
+        </div>
       </div>
     </div>
   </li>
+</template>
+
+<template name="retrospectiveCreateTag">
+  <div id="new-tag-modal-{{_id}}" class="modal hide fade">
+    <div class="modal-header">
+      <button class="close" data-dismiss="modal">&times;</button>
+      <h2>Add a tag</h3>
+    </div>
+    <div class="modal-body">
+      <form action="javascript:void(0)">
+        <label class="control-label" for="new-tag-name-{{_id}}">Text</label>
+        <div class="controls">
+          <input type="text" class="input-xlarge" id="new-tag-name-{{_id}}">
+        </div>
+        <button type="submit" class="btn btn-primary">Add item</button>
+      </form>
+    </div>
+  </div>
+  {{focusOnShow}}
 </template>
 
 <template name="retrospectiveFacilitatorNav">
