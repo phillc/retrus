@@ -83,12 +83,12 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#new-tag-modal-{{_id}}" data-toggle="modal">Add new tag</a></li>
+              <li><a href="#new-tag-modal-{{_id}}" data-toggle="modal"><i class="icon-plus"></i> Add new tag</a></li>
               <li class="divider"></li>
-              <li><a href="">Add tag: Foo</a></li>
+              <li><a href=""><i class="icon-ok"></i> Add tag: Foo</a></li>
               <li class="divider"></li>
               {{#each tags}}
-                <li><a href="#">Remove Tag: {{this}}</a></li>
+                <li><a href="#"><i class="icon-remove"></i> Remove Tag: {{this}}</a></li>
               {{/each}}
             </ul>
           </div>
