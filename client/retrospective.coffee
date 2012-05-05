@@ -1,5 +1,7 @@
-this.Sections = new Meteor.Collection("sections")
-this.Items = new Meteor.Collection("items")
+window.Sections = new Meteor.Collection("sections")
+window.Items = new Meteor.Collection("items")
+
+Session.set 'currentTags', []
 
 Meteor.autosubscribe ->
   retrospective_id = Session.get 'currentRetrospective'
@@ -11,12 +13,29 @@ Meteor.autosubscribe ->
   sections.forEach (section) ->
     Meteor.subscribe 'items', section._id
 
+Meteor.autosubscribe ->
+  items = Items.find()
+  tags = {}
+  items.forEach (item) ->
+    item.tags?.forEach (tag) ->
+      tags[tag] ||= 0
+      tags[tag]++
+
+  tag_counts = []
+  $.each tags, (tag, count) ->
+    tag_counts.push {name: tag, count: count}
+
+  Session.set 'currentTags', tag_counts
+
 Template.retrospective.show = ->
   !!Session.get 'currentRetrospective'
 
 Template.retrospectiveHeader.retrospectiveName = ->
   retrospective_id = Session.get 'currentRetrospective'
   Retrospectives.findOne(_id: retrospective_id)?.name
+
+Template.retrospectiveHeader.tags = ->
+  Session.get 'currentTags'
 
 Template.retrospectiveFacilitatorNav.currentRetrospective = ->
   Session.get 'currentRetrospective'
