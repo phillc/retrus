@@ -78,6 +78,9 @@ Template.retrospectiveCreateItem.events =
     $("#new-item-modal-#{@_id}").modal('hide')
     $("#new-item-name-#{@_id}").val("")
 
+Template.retrospectiveItem.currentTags = ->
+  Session.get 'currentTags'
+
 Template.retrospectiveItem.events =
   'click .retrospective-agree': ->
     Items.update { _id: @_id }, { $inc: { agree: 1 } }
