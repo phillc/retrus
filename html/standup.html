@@ -1,11 +1,13 @@
 <template name="standup">
+  {{#if show}}
   ::shuffle::
   <table>
     <tr>
       <td>Initialize with logged in user name</td>
-      <td>::pair:: ::out:: ::invite:: ::email:: ::delete::</td>
+      <td>::pair:: ::out:: ::invite:: ::email:: ::invite to hangout::  ::delete -> are you sure?::</td>
     </tr>
   </table>
 
+  {{/if}}
 
 </template>

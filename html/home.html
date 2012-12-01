@@ -6,7 +6,10 @@
         <p>A suite of tools aimed at making distributed conversations better.</p>
         <div>
           {{#if canCreateRoom}}
-            <a href="/room/new" class="btn">Create a room</a>
+            <ul>
+              <li><a href="/room/new" class="btn">Create a room</a></li>
+              <li>Enter "ROOM NAME"</li>
+            </ul>
           {{else}}
             Sign in above to create a room
           {{/if}}
