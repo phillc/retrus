@@ -1,44 +1,54 @@
-this.Retrospectives = new Meteor.Collection("retrospectives")
-
-Meteor.subscribe 'retrospectives', ->
-
 Template.home.show = ->
-  !Session.get "currentRetrospective"
+  Session.get("currentPage") == "home"
 
-Template.retrospectives_list.retrospectives = ->
-  Retrospectives.find()
+Template.room.show = ->
+  Session.get("currentPage") == "room"
 
-Template.createRetrospective.events =
-  submit: ->
-    id = Retrospectives.insert
-      name: $("#new-retrospective-name").val()
-    Router.setRetrospectiveFacilitator id
+Template.room.roomId = ->
+  Session.get "currentPageParam"
+
+Template.home.canCreateRoom = ->
+  !!@userId
 
 AppRouter = Backbone.Router.extend
   routes:
     "": "root"
-    "retrospectives/:retrospective_id/facilitator": "retrospectiveFacilitator"
-    "retrospectives/:retrospective_id": "retrospective"
+    "room/new": "roomNew"
+    "room/:id": "room"
+    "room/:id/standup": "standup"
+    ".*": "notFound"
 
   root: ->
-    Session.set "currentRetrospective", null
+    @setPage("home")
 
-  retrospectiveFacilitator: (retrospective_id) ->
-    Session.set "facilitating", true
-    Session.set "currentRetrospective", retrospective_id
+  roomNew: ->
+    Meteor.call "createRoom", (err, roomId) =>
+      @navigate "room/#{roomId}"
 
-  retrospective: (retrospective_id) ->
-    Session.set "facilitating", false
-    Session.set "currentRetrospective", retrospective_id
+  room: (roomId) ->
+    @setPage "room", roomId
 
-  setHome: ->
-    @navigate "", true
-  setRetrospective: (retrospective_id) ->
-    @navigate "retrospectives/#{retrospective_id}", true
-  setRetrospectiveFacilitator: (retrospective_id) ->
-    @navigate "retrospectives/#{retrospective_id}/facilitator", true
+  standup: (roomId) ->
+    @setPage "standup", roomId
+
+  notFound: ->
+    @setPage("notFound")
+
+  setPage: (page, pageParam) ->
+    console.log "Navigating to #{page}, #{pageParam}"
+    Session.set "currentPage", page
+    Session.set "currentPageParam", pageParam
 
 this.Router = new AppRouter
 
 Meteor.startup ->
   Backbone.history.start({ pushState: true })
+
+  if Backbone.history && Backbone.history._hasPushState
+    $(document).delegate "a", "click", (evt) ->
+      href = $(this).attr("href")
+      protocol = this.protocol + "//"
+
+      if (href.slice(protocol.length) != protocol)
+        evt.preventDefault()
+        Backbone.history.navigate(href, true)

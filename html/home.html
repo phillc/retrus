@@ -1,11 +1,16 @@
 <template name="home">
-{{loginButtons}}
   {{#if show}}
-  <div class="container">
     <div class="row">
       <div class="hero-unit">
         <h1>Easier communication</h1>
         <p>A suite of tools aimed at making distributed conversations better.</p>
+        <div>
+          {{#if canCreateRoom}}
+            <a href="/room/new" class="btn">Create a room</a>
+          {{else}}
+            Sign in above to create a room
+          {{/if}}
+        </div>
       </div>
     </div>
     <div class="row">
@@ -14,56 +19,14 @@
         <p>A tool for distributed collaboration</p>
       </div>
       <div class="span4">
-        <h2>Join a wall now</h2>
-        <p>Enter live conversations</p>
+        <h2>Standup Assistant</h2>
+        <p>A tool for distributed standups</p>
       </div>
       <div class="span4">
-        <h2>Contribute</h2>
-        <p>Available on github</p>
+        <h2>Conference status</h2>
+        <p>Assistance in nonverbal communication</p>
       </div>
     </div>
-    <div class="row">
-      <div class="span4">
-        {{> createRetrospective }}
-      </div>
-      <div class="span4">
-        <div id="retrospectives-list" class="well sidebar-nav">
-          {{> retrospectives_list }}
-        </div>
-      </div>
-      <div class="span4">
-        <p><a class="btn" href="https://github.com/phillc/retrus">Go to documentation &raquo;</a></p>
-      </div>
-    </div>
-
-    <hr>
-    <footer>
-      <p>&copy; <a href="http://phillc.com/">Phillip Campbell</a> 2012</p>
-    </footer>
-  </div>
   {{/if}}
-</template>
-
-<template name="createRetrospective">
-  <form class="well" action="javascript:void(0)">
-    <legend>Create one now!</legend>
-    <fieldset>
-      <div class="control-group">
-        <label class="control-label" for="new-retrospective-name">Name of your retrospective</label>
-        <div class="controls">
-          <input type="text" class="span3" id="new-retrospective-name">
-        </div>
-      </div>
-    </fieldset>
-    <button class="btn btn-primary">Start a retrospective &raquo;</button>
-  </form>
-</template>
-
-<template name="retrospectives_list">
-  <ul class="nav nav-list">
-    {{#each retrospectives}}
-      <li><a href="javascript:Router.setRetrospective('{{_id}}');">{{name}}</a></li>
-    {{/each}}
-  </ul>
 </template>
 
