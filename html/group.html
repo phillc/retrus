@@ -1,0 +1,9 @@
+<template name="group">
+  {{#if show}}
+    <div>
+      <a href="/group/{{groupId}}/standup" class="btn">Stand up</a>
+      <a href="/group/{{groupId}}/retrospective" class="btn">Retrospective</a>
+      <a href="/group/{{groupId}}/conversation" class="btn">Conversation Meter</a>
+    </div>
+  {{/if}}
+</template>

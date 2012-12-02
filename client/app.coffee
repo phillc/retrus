@@ -1,35 +1,41 @@
+Meteor.subscribe "groups"
+
 Template.home.show = ->
   Session.get("currentPage") == "home"
+Template.home.canCreateGroup = ->
+  !!Meteor.userId()
+Template.home.groups = ->
+  Groups.find()
 
-Template.room.show = ->
-  Session.get("currentPage") == "room"
-
-Template.room.roomId = ->
+Template.group.show = ->
+  Session.get("currentPage") == "group"
+Template.group.groupId = ->
   Session.get "currentPageParam"
 
-Template.home.canCreateRoom = ->
-  !!@userId
+Template.standup.show = ->
+  Session.get("currentPage") == "standup"
 
 AppRouter = Backbone.Router.extend
   routes:
     "": "root"
-    "room/new": "roomNew"
-    "room/:id": "room"
-    "room/:id/standup": "standup"
+    "group/new": "groupNew"
+    "group/:id": "group"
+    "group/:id/standup": "standup"
     ".*": "notFound"
 
   root: ->
     @setPage("home")
 
-  roomNew: ->
-    Meteor.call "createRoom", (err, roomId) =>
-      @navigate "room/#{roomId}"
+  groupNew: ->
+    Meteor.call "createGroup", (err, groupId) =>
+      @navigate "group/#{groupId}"
 
-  room: (roomId) ->
-    @setPage "room", roomId
+  group: (groupId) ->
+    @setPage "group", groupId
 
-  standup: (roomId) ->
-    @setPage "standup", roomId
+  standup: (groupId) ->
+    console.log "Setting page as standup"
+    @setPage "standup", groupId
 
   notFound: ->
     @setPage("notFound")
@@ -46,6 +52,7 @@ Meteor.startup ->
 
   if Backbone.history && Backbone.history._hasPushState
     $(document).delegate "a", "click", (evt) ->
+      console.log "link clicked"
       href = $(this).attr("href")
       protocol = this.protocol + "//"
 

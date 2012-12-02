@@ -5,13 +5,16 @@
         <h1>Easier communication</h1>
         <p>A suite of tools aimed at making distributed conversations better.</p>
         <div>
-          {{#if canCreateRoom}}
+          {{#if canCreateGroup}}
             <ul>
-              <li><a href="/room/new" class="btn">Create a room</a></li>
-              <li>Enter "ROOM NAME"</li>
+              <li><a href="/group/new" class="btn">Create a group</a></li>
+              <li>Enter "GROUP NAME"</li>
+              {{#each groups}}
+                <li><a href="/group/{{_id}}">{{_id}}</a></li>
+              {{/each}}
             </ul>
           {{else}}
-            Sign in above to create a room
+            Sign in above to create a group
           {{/if}}
         </div>
       </div>
@@ -26,7 +29,7 @@
         <p>A tool for distributed standups</p>
       </div>
       <div class="span4">
-        <h2>Conference status</h2>
+        <h2>Conversation Meter</h2>
         <p>Assistance in nonverbal communication</p>
       </div>
     </div>
