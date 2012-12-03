@@ -6,9 +6,21 @@
 </ModulePrefs>
 <Content type="html"><![CDATA[
   <!DOCTYPE html>
-  <script type="text/javascript" src="//www.google.com/jsapi"></script>
-  <script type="text/javascript">google.load("jquery", "1.3.2");</script>
-  <script type="text/javascript">alert("FOO!!");</script>
+  <script src="//talkgadget.google.com/hangouts/_/api/hangout.js?v=1.2"></script>
+  <form action="javascript:void(0)" id="group-form">
+    <input type="text" id="group-form-id" placeholder="retrus group id" />
+  </form>
+  <div id="retrus-container">
+  </div>
+  <script type="text/javascript">
+    $("#group-form").submit(function(){
+      var iframe = "<iframe height='100%' src='http://retr.us/group/";
+      iframe += $("#group-form-id").val();
+      iframe += "/standup' ></iframe>"
+
+      $("#retrus-container").html(iframe);
+    });
+  </script>
 ]]></Content>
 </Module>
 

@@ -1,0 +1,28 @@
+<template name="standup">
+  {{#if show}}
+    <button class="standup-shuffle btn btn-primary">shuffle</button>
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        {{#each members}}
+          {{> standupMember}}
+        {{/each}}
+      </tbody>
+    </table>
+    <form action="javascript:void(0)" id="new-standup-member">
+      <input type="text" id="new-standup-member-name" placeholder="New Member" />
+    </form>
+  {{/if}}
+</template>
+
+<template name="standupMember">
+  <tr>
+    <td>{{name}}</td>
+    <td>
+      <button class="delete-standup-member btn btn-danger">delete</button>
+    </td>
+  </tr>
+</template>

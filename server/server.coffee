@@ -12,4 +12,8 @@ Meteor.publish "standup_members", ->
 StandupMembers.allow
   insert: (userId, standupMember) ->
     !!standupMember?.name && !!standupMember?.group
+  update: (userId, docs, fields, modifier) ->
+    true
+  remove: (userId, docs) ->
+    true
 
