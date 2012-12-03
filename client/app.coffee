@@ -1,4 +1,7 @@
 Meteor.subscribe "groups"
+# Meteor.autosubscribe ->
+  # Meteor.subscribe "standup_members", group: 
+Meteor.subscribe "standup_members"
 
 Template.home.show = ->
   Session.get("currentPage") == "home"
@@ -14,6 +17,15 @@ Template.group.groupId = ->
 
 Template.standup.show = ->
   Session.get("currentPage") == "standup"
+Template.standup.events =
+  "submit #new-standup-member": (huh) ->
+    memberName = $("#new-standup-member-name").val()
+    $("#new-standup-member-name").val("")
+    StandupMembers.insert
+      name: memberName
+      group: Session.get "currentPageParam"
+Template.standup.members = ->
+  StandupMembers.find()
 
 AppRouter = Backbone.Router.extend
   routes:

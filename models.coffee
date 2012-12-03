@@ -1,1 +1,0 @@
-Groups = new Meteor.Collection("groups")

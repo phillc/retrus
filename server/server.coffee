@@ -6,3 +6,10 @@ Meteor.methods
 
 Meteor.publish "groups", ->
   Groups.find owner: @userId
+Meteor.publish "standup_members", ->
+  StandupMembers.find()
+
+StandupMembers.allow
+  insert: (userId, standupMember) ->
+    !!standupMember?.name && !!standupMember?.group
+
