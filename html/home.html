@@ -7,10 +7,9 @@
         <div>
           {{#if canCreateGroup}}
             <ul>
-              <li><a href="/group/new" class="btn">Create a group</a></li>
-              <li>Enter "GROUP NAME"</li>
+              <li><button id="new-group" class="btn">Create a group</button></li>
               {{#each groups}}
-                <li><a href="/group/{{_id}}">{{_id}}</a></li>
+                <li><a href="/group/{{_id}}">Enter "{{name}}"</a></li>
               {{/each}}
             </ul>
           {{else}}

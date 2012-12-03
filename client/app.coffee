@@ -3,6 +3,11 @@ Meteor.subscribe "groups"
   # Meteor.subscribe "standup_members", group: 
 Meteor.subscribe "standup_members"
 
+Template.home.events =
+  "click #new-group": ->
+    Meteor.call "createGroup", (err, groupId) ->
+      Backbone.history.navigate("group/#{groupId}", true)
+
 Template.home.show = ->
   Session.get("currentPage") == "home"
 Template.home.canCreateGroup = ->
@@ -38,10 +43,6 @@ AppRouter = Backbone.Router.extend
   root: ->
     @setPage("home")
 
-  groupNew: ->
-    Meteor.call "createGroup", (err, groupId) =>
-      @navigate "group/#{groupId}"
-
   group: (groupId) ->
     @setPage "group", groupId
 
@@ -70,4 +71,5 @@ Meteor.startup ->
 
       if (href.slice(protocol.length) != protocol)
         evt.preventDefault()
+        console.log "navigating to #{href}"
         Backbone.history.navigate(href, true)
