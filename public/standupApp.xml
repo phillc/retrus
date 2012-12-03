@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="retr.us Standup Assistant" height="100" width="550">
+  <Require feature="dynamic-height"/>
+  <Require feature="rpc"/>
+</ModulePrefs>
+<Content type="html"><![CDATA[
+  <!DOCTYPE html>
+  <script type="text/javascript" src="//www.google.com/jsapi"></script>
+  <script type="text/javascript">google.load("jquery", "1.3.2");</script>
+  <script type="text/javascript">alert("FOO!!");</script>
+]]></Content>
+</Module>
+
