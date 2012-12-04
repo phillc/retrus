@@ -8,7 +8,9 @@
       </thead>
       <tbody>
         {{#each members}}
-          {{> standupMember}}
+          <tr>
+            {{> standupMember}}
+          </tr>
         {{/each}}
       </tbody>
     </table>
@@ -19,9 +21,7 @@
 </template>
 
 <template name="standupMember">
-  <tr>
-    <td>{{name}}</td>
-  </tr>
+  <td>{{name}}</td>
 </template>
 
 <template name="standupActionsHeader">

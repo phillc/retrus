@@ -7,16 +7,16 @@ Template.standup.events =
     $("#new-standup-member-name").val("")
     StandupMembers.insert
       name: memberName
-      group: Session.get "standupPage"
-      order: Math.random()
+      group: Session.get "currentGroupId"
+      order: 2
   "click .standup-shuffle": ->
-    group = Session.get "standupPage"
-    standupMembers = StandupMembers.find({group: Session.get("standupPage")})
+    group = Session.get "currentGroupId"
+    standupMembers = StandupMembers.find({group: Session.get("currentGroupId")})
     standupMembers.forEach (member) ->
       StandupMembers.update({_id: member.id}, {$set: {order: Math.random()}})
 
 Template.standup.members = ->
-  StandupMembers.find({group: Session.get("standupPage")}, {sort: {order: 1}})
+  StandupMembers.find({group: Session.get("currentGroupId")}, {sort: {order: 1}})
 
 Template.standupMember.events =
   "click .delete-standup-member": ->
