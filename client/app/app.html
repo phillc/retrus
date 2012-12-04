@@ -14,6 +14,7 @@
     {{> home }}
     {{> group }}
     {{> standup }}
+    {{> notFound }}
     <hr />
     <footer>
       <p>&copy; <a href="http://phillc.com/">Phillip Campbell</a> 2012</p>
@@ -21,3 +22,8 @@
   </div>
 </body>
 
+<template name="notFound">
+  {{#if show}}
+    Page not found
+  {{/if}}
+</template>
