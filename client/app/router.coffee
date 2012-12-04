@@ -31,9 +31,6 @@ AppRouter = Backbone.Router.extend
     @_setPage notFound: true
 
   _setGroupPage: (options) ->
-    console.log options
-    console.log Groups.find().fetch()
-    console.log Meteor.status()
     if Groups.findOne(options.groupId)
       @_setPage options
     else
@@ -56,11 +53,9 @@ Meteor.startup ->
 
     if Backbone.history && Backbone.history._hasPushState
       $(document).delegate "a", "click", (evt) ->
-        console.log "link clicked"
         href = $(this).attr("href")
         protocol = this.protocol + "//"
 
         if (href.slice(protocol.length) != protocol)
           evt.preventDefault()
-          console.log "navigating to #{href}"
           Backbone.history.navigate(href, true)

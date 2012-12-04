@@ -1,6 +1,9 @@
 <template name="standup">
   {{#if show}}
     <button class="standup-shuffle btn btn-primary">shuffle</button>
+    <button class="standup-edit btn btn-warning">toggle edit</button>
+    <button class="standup-next btn btn-info">next</button>
+    <button class="standup-previous btn btn-info">previous</button>
     <table>
       <thead>
         <th>Name</th>
@@ -8,9 +11,7 @@
       </thead>
       <tbody>
         {{#each members}}
-          <tr>
-            {{> standupMember}}
-          </tr>
+          {{> standupMember}}
         {{/each}}
       </tbody>
     </table>
@@ -21,7 +22,10 @@
 </template>
 
 <template name="standupMember">
-  <td>{{name}}</td>
+  <tr class="standupMember{{#if selected}} selected{{/if}}">
+    <td>{{name}}</td>
+    {{> standupActions}}
+  </tr>
 </template>
 
 <template name="standupActionsHeader">
