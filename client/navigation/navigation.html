@@ -1,14 +1,16 @@
 <template name="navigation">
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="brand" href="/">Retrus</a>
-        <ul class="nav pull-right">
-          <li><a href="/">Foo</a></li>
-          <li>{{loginButtons}}</li>
-        </ul>
+  {{#if show}}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Retrus</a>
+          <ul class="nav pull-right">
+            <li><a href="/">Foo</a></li>
+            <li>{{loginButtons}}</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
+    {{/if}}
 </template>
 

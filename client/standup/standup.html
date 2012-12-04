@@ -4,7 +4,7 @@
     <table>
       <thead>
         <th>Name</th>
-        <th>Actions</th>
+        {{> standupActionsHeader}}
       </thead>
       <tbody>
         {{#each members}}
@@ -21,8 +21,19 @@
 <template name="standupMember">
   <tr>
     <td>{{name}}</td>
+  </tr>
+</template>
+
+<template name="standupActionsHeader">
+  {{#if show}}
+    <th>Actions</th>
+  {{/if}}
+</template>
+
+<template name="standupActions">
+  {{#if show}}
     <td>
       <button class="delete-standup-member btn btn-danger">delete</button>
     </td>
-  </tr>
+  {{/if}}
 </template>

@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="retr.us Standup Assistant" height="100" width="550">
-  <Require feature="dynamic-height"/>
-  <Require feature="rpc"/>
-</ModulePrefs>
-<Content type="html"><![CDATA[
-  <!DOCTYPE html>
-  <script src="//talkgadget.google.com/hangouts/_/api/hangout.js?v=1.2"></script>
-  <form action="javascript:void(0)" id="group-form">
-    <input type="text" id="group-form-id" placeholder="retrus group id" />
-  </form>
-  <div id="retrus-container">
-  </div>
-  <script type="text/javascript">
-    $("#group-form").submit(function(){
-      var iframe = "<iframe height='100%' src='http://retr.us/group/";
-      iframe += $("#group-form-id").val();
-      iframe += "/standup' ></iframe>"
+  <ModulePrefs title="retr.us Standup Assistant">
+    <Require feature="dynamic-height"/>
+    <Require feature="rpc"/>
+  </ModulePrefs>
+  <Content type="html"><![CDATA[
+    <!DOCTYPE html>
+    <html>
+      <body>
+        <script type="text/javascript" src="//www.google.com/jsapi"></script>
+        <script type="text/javascript">google.load("jquery", "1.4.1");</script>
+        <script src="//talkgadget.google.com/hangouts/_/api/hangout.js?v=1.2"></script>
+        <form action="javascript:void(0)" id="group-form">
+          <input type="text" id="group-form-id" placeholder="retrus group id" />
+        </form>
+        <div id="retrus-container" style="height: 100%;">
+        </div>
+        <script type="text/javascript">
+          $("#group-form").submit(function(){
+            var iframe = "<iframe height='100%' src='http://retr.us/group/";
+            iframe += $("#group-form-id").val();
+            iframe += "/standup/light' ></iframe>";
+            console.log(iframe);
 
-      $("#retrus-container").html(iframe);
-    });
-  </script>
-]]></Content>
+            $("#retrus-container").html(iframe);
+          });
+        </script>
+      </body>
+    </html>
+  ]]></Content>
 </Module>
 

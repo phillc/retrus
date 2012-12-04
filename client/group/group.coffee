@@ -1,5 +1,5 @@
 Template.group.show = ->
-  Session.get("currentPage") == "group"
+  !!Session.get("groupPage")
 
 Template.group.groupId = ->
-  Session.get "currentGroup"
+  Session.get "groupPage"

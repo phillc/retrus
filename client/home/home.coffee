@@ -4,7 +4,7 @@ Template.home.events =
       Backbone.history.navigate("group/#{groupId}", true)
 
 Template.home.show = ->
-  Session.get("currentPage") == "home"
+  !!Session.get("homePage")
 
 Template.home.canCreateGroup = ->
   !!Meteor.userId()

@@ -4,26 +4,31 @@ AppRouter = Backbone.Router.extend
     "group/new": "groupNew"
     "group/:id": "group"
     "group/:id/standup": "standup"
+    "group/:id/standup/light": "standupLight"
     ".*": "notFound"
 
   root: ->
     @_setPage("home")
 
   group: (groupId) ->
-    @_setGroupPage "group", groupId
+    @_setPage group: groupId
 
+  standupLight: (groupId) ->
+    @_setPage
+      standup: groupId
+      light: true
   standup: (groupId) ->
-    @_setGroupPage "standup", groupId
+    @_setPage standup: groupId
 
   notFound: ->
     @_setPage("notFound")
 
-  _setGroupPage: (page, group) ->
-    Session.set "currentGroup", group
-    @_setPage page
-
-  _setPage: (page) ->
-    Session.set "currentPage", page
+  _setPage: (options) ->
+    console.log options
+    Session.set "homePage", (options == "home")
+    Session.set "groupPage", options.group
+    Session.set "standupPage", options.standup
+    Session.set "lightMode", !!options.light
 
 this.Router = new AppRouter
 
