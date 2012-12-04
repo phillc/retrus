@@ -13,7 +13,7 @@ Template.standup.events =
     group = Session.get "currentGroupId"
     standupMembers = StandupMembers.find({group: Session.get("currentGroupId")})
     standupMembers.forEach (member) ->
-      StandupMembers.update({_id: member.id}, {$set: {order: Math.random()}})
+      StandupMembers.update({_id: member._id}, {$set: {order: Math.random()}})
 
 Template.standup.members = ->
   StandupMembers.find({group: Session.get("currentGroupId")}, {sort: {order: 1}})
