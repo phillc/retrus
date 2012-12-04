@@ -1,2 +1,2 @@
 Template.navigation.show = ->
-  !Session.get "lightMode"
+  Session.equals "lightMode", false

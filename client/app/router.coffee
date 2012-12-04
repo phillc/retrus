@@ -32,6 +32,7 @@ AppRouter = Backbone.Router.extend
 
   _setGroupPage: (options) ->
     console.log options
+    console.log Groups.find().fetch()
     if Groups.findOne(options.groupId)
       @_setPage options
     else

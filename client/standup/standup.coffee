@@ -1,5 +1,5 @@
 Template.standup.show = ->
-  !!Session.get("standupPage")
+  Session.equals("standupPage", true)
 
 Template.standup.events =
   "submit #new-standup-member": ->

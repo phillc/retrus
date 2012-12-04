@@ -4,4 +4,4 @@ Meteor.subscribe "groups"
 Meteor.subscribe "standup_members"
 
 Template.notFound.show = ->
-  !!Session.get "notFoundPage"
+  Session.equals "notFoundPage", true
