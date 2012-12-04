@@ -33,6 +33,7 @@ AppRouter = Backbone.Router.extend
   _setGroupPage: (options) ->
     console.log options
     console.log Groups.find().fetch()
+    console.log Meteor.status()
     if Groups.findOne(options.groupId)
       @_setPage options
     else
@@ -50,15 +51,16 @@ AppRouter = Backbone.Router.extend
 this.Router = new AppRouter
 
 Meteor.startup ->
-  Backbone.history.start({ pushState: true })
+  Meteor.subscribe "groups", ->
+    Backbone.history.start({ pushState: true })
 
-  if Backbone.history && Backbone.history._hasPushState
-    $(document).delegate "a", "click", (evt) ->
-      console.log "link clicked"
-      href = $(this).attr("href")
-      protocol = this.protocol + "//"
+    if Backbone.history && Backbone.history._hasPushState
+      $(document).delegate "a", "click", (evt) ->
+        console.log "link clicked"
+        href = $(this).attr("href")
+        protocol = this.protocol + "//"
 
-      if (href.slice(protocol.length) != protocol)
-        evt.preventDefault()
-        console.log "navigating to #{href}"
-        Backbone.history.navigate(href, true)
+        if (href.slice(protocol.length) != protocol)
+          evt.preventDefault()
+          console.log "navigating to #{href}"
+          Backbone.history.navigate(href, true)
