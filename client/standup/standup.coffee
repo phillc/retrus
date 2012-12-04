@@ -1,3 +1,11 @@
+do ->
+  $(document).keydown (e) ->
+    up = [38, 75]
+    down = [40, 74]
+    if up.indexOf(e.keyCode) >= 0
+      Standup.Members.previous()
+    else if down.indexOf(e.keyCode) >= 0
+      Standup.Members.next()
 Standup = do ->
   class Members
     findSelected: ->
