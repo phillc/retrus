@@ -4,3 +4,6 @@ Meteor.subscribe "standup_members"
 
 Template.notFound.show = ->
   Session.equals "notFoundPage", true
+
+Template.footer.show = ->
+  Session.equals "lightMode", false
