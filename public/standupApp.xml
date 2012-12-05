@@ -17,14 +17,28 @@
         <div id="retrus-container" style="height: 100%;">
         </div>
         <script type="text/javascript">
-          $("#group-form").submit(function(){
-            var iframe = "<iframe height='100%' src='http://retr.us/group/";
-            iframe += $("#group-form-id").val();
-            iframe += "/standup/light' ></iframe>";
-            console.log(iframe);
+          (function() {
+            var setStandup = function(standupId) {
+              var iframe = "";
+              if(standupId){
+                iframe += "<iframe height='100%' src='http://retr.us/group/";
+                iframe += standupId;
+                iframe += "/standup/light' ></iframe>";
+              }
 
-            $("#retrus-container").html(iframe);
-          });
+              $("#retrus-container").html(iframe);
+            };
+
+            $("#group-form").submit(function(){
+              var standupId = $("#group-form-id").val();
+              gapi.hangout.data.setValue("standupId", standupId);
+            });
+
+            gapi.hangout.data.onStateChanged.add(function(stateChangeEvent) {
+              var standupId = stateChangeEvent.state.standupId;
+              setStandup($("#group-form-id").val());
+            });
+          })();
         </script>
       </body>
     </html>
