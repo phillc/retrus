@@ -74,6 +74,9 @@ Template.standupMemberNew.show = ->
 Template.standupActions.show = ->
   Session.equals "lightMode", false
 
+Template.standupActions.googleData = ->
+  Session.get "currentGroupId"
+
 Template.standupMember.events =
   "click .delete-standup-member": ->
     StandupMembers.remove(@_id)

@@ -2,6 +2,7 @@
 <Module>
   <ModulePrefs title="retr.us Standup Assistant">
     <Require feature="dynamic-height"/>
+    <Require feature="views"/>
     <Require feature="rpc"/>
   </ModulePrefs>
   <Content type="html"><![CDATA[
@@ -19,6 +20,7 @@
         <script type="text/javascript">
           (function() {
             var setStandup = function(standupId) {
+              console.log("rendering standup: ", standupId);
               var iframe = "";
               if(standupId){
                 iframe += "<iframe height='100%' src='http://retr.us/group/";
@@ -29,10 +31,20 @@
               $("#retrus-container").html(iframe);
             };
 
+            var setStandupId = function(standupId) {
+              console.log("Setting standup to: ", standupId);
+              gapi.hangout.data.setValue("standupId", standupId.trim());
+            };
+
             $("#group-form").submit(function(){
               var standupId = $("#group-form-id").val();
-              gapi.hangout.data.setValue("standupId", standupId);
+              setStandupId(standupId);
             });
+
+            var paramsStandupId = gadgets.views.getParams()['appData'];
+            if(paramsStandupId) {
+              setStandupId(paramsStandupId);
+            }
 
             gapi.hangout.data.onStateChanged.add(function(stateChangeEvent) {
               var standupId = stateChangeEvent.state.standupId;
