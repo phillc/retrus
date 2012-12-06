@@ -5,7 +5,7 @@ Meteor.methods
     Groups.insert(name: "New Group", owner: @userId)
 
 Meteor.publish "groups", ->
-  Groups.find owner: @userId
+  Groups.find()
 
 Meteor.publish "standup_members", ->
   StandupMembers.find()
