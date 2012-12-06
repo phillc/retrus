@@ -51,11 +51,11 @@ Meteor.startup ->
   Meteor.subscribe "groups", ->
     Backbone.history.start({ pushState: true })
 
-    if Backbone.history && Backbone.history._hasPushState
-      $(document).delegate "a", "click", (evt) ->
-        href = $(this).attr("href")
-        protocol = this.protocol + "//"
+    $(document).delegate "a:not([data-bypass])", "click", (event) ->
+      href = $(event.currentTarget).attr('href')
 
-        if (href.slice(protocol.length) != protocol)
-          evt.preventDefault()
-          Backbone.history.navigate(href, true)
+      if !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey
+        event.preventDefault()
+
+        Backbone.history.navigate(href, true)
+        return false
