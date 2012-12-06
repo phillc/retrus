@@ -1,13 +1,10 @@
 <template name="standup">
   {{#if show}}
-    <button class="standup-shuffle btn btn-primary">shuffle</button>
-    <button class="standup-edit btn btn-warning">toggle edit</button>
-    <button class="standup-next btn btn-info">next</button>
-    <button class="standup-previous btn btn-info">previous</button>
+    {{> standupActions}}
     <table>
       <thead>
         <th>Name</th>
-        {{> standupActionsHeader}}
+        {{> standupMemberActionsHeader}}
       </thead>
       <tbody>
         {{#each members}}
@@ -15,6 +12,29 @@
         {{/each}}
       </tbody>
     </table>
+    {{> standupMemberNew}}
+  {{/if}}
+</template>
+
+<template name="standupActions">
+  {{#if show}}
+    <div class="btn-group">
+      <button class="standup-previous btn btn-info"><i class="icon-arrow-up"></i> previous</button>
+      <button class="standup-next btn btn-info"><i class="icon-arrow-down"></i> next</button>
+    </div>
+    <button class="standup-shuffle btn btn-inverse">shuffle</button>
+    <button class="standup-hangout btn btn-primary">Google Hangout</button>
+    <button class="standup-edit btn btn-danger">toggle edit</button>
+  {{/if}}
+</template>
+
+<template name="standup-hangout-info">
+    ::G+ button::
+    ::id of this chat::
+</template>
+
+<template name="standupMemberNew">
+  {{#if show}}
     <form action="javascript:void(0)" id="new-standup-member">
       <input type="text" id="new-standup-member-name" placeholder="New Member" />
     </form>
@@ -24,17 +44,17 @@
 <template name="standupMember">
   <tr class="standupMember{{#if selected}} selected{{/if}}">
     <td>{{name}}</td>
-    {{> standupActions}}
+    {{> standupMemberActions}}
   </tr>
 </template>
 
-<template name="standupActionsHeader">
+<template name="standupMemberActionsHeader">
   {{#if show}}
     <th>Actions</th>
   {{/if}}
 </template>
 
-<template name="standupActions">
+<template name="standupMemberActions">
   {{#if show}}
     <td>
       <button class="delete-standup-member btn btn-danger">delete</button>

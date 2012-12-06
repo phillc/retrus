@@ -47,13 +47,6 @@ Template.standup.show = ->
   Session.equals("standupPage", true)
 
 Template.standup.events =
-  "submit #new-standup-member": ->
-    memberName = $("#new-standup-member-name").val()
-    $("#new-standup-member-name").val("")
-    StandupMembers.insert
-      name: memberName
-      group: Session.get "currentGroupId"
-      position: new Date().valueOf()
   "click .standup-shuffle": ->
     Standup.Members.shuffle()
   "click .standup-edit": ->
@@ -66,6 +59,21 @@ Template.standup.events =
 Template.standup.members = ->
   Standup.Members.findAll()
 
+Template.standupMemberNew.events =
+  "submit #new-standup-member": ->
+    memberName = $("#new-standup-member-name").val()
+    $("#new-standup-member-name").val("")
+    StandupMembers.insert
+      name: memberName
+      group: Session.get "currentGroupId"
+      position: new Date().valueOf()
+
+Template.standupMemberNew.show = ->
+  Session.equals "lightMode", false
+
+Template.standupActions.show = ->
+  Session.equals "lightMode", false
+
 Template.standupMember.events =
   "click .delete-standup-member": ->
     StandupMembers.remove(@_id)
@@ -73,8 +81,8 @@ Template.standupMember.events =
     StandupMembers.update({group: Session.get("currentGroupId")}, {$set: {selected: false}}, {multi: true})
     StandupMembers.update(@_id, {$set: {selected: true}})
 
-Template.standupActionsHeader.show = ->
+Template.standupMemberActionsHeader.show = ->
   Session.equals("standupEditing", true)
 
-Template.standupActions.show = ->
+Template.standupMemberActions.show = ->
   Session.equals("standupEditing", true)
