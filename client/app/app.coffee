@@ -7,3 +7,6 @@ Template.notFound.show = ->
 
 Template.footer.show = ->
   Session.equals "lightMode", false
+
+Template.navigation.show = ->
+  Session.equals "lightMode", false
