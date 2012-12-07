@@ -13,6 +13,13 @@
       </tbody>
     </table>
     {{> standupMemberNew}}
+    {{> standupLight}}
+  {{/if}}
+</template>
+
+<template name="standupLight">
+  {{#if show}}
+    <a href="/group/{{groupId}}/standup" target="_blank" data-bypass>Launch in retr.us</a>
   {{/if}}
 </template>
 

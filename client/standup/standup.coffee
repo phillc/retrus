@@ -89,3 +89,10 @@ Template.standupMemberActionsHeader.show = ->
 
 Template.standupMemberActions.show = ->
   Session.equals("standupEditing", true)
+
+Template.standupLight.show = ->
+  Session.equals "lightMode", true
+
+Template.standupLight.groupId = ->
+  Session.get "currentGroupId"
+
