@@ -42,13 +42,15 @@
             });
 
             var paramsStandupId = gadgets.views.getParams()['appData'];
+            console.log("Id on page load:", paramsStandupId);
             if(paramsStandupId) {
               setStandupId(paramsStandupId);
             }
 
             gapi.hangout.data.onStateChanged.add(function(stateChangeEvent) {
               var standupId = stateChangeEvent.state.standupId;
-              setStandup($("#group-form-id").val());
+              console.log("Id on state change", standupId);
+              setStandup(standupId);
             });
           })();
         </script>
