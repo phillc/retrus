@@ -1,7 +1,7 @@
 <template name="standup">
   {{#if show}}
     {{> standupActions}}
-    <table>
+    <table class="standupMemberList table">
       <tbody>
         {{#each members}}
           {{> standupMember}}
@@ -53,7 +53,7 @@
 <template name="standupMemberActions">
   {{#if show}}
     <td>
-      <button class="delete-standup-member btn btn-danger">delete</button>
+      <button class="delete-standup-member btn btn-mini btn-danger"><i class="icon-trash"></i></button>
     </td>
   {{/if}}
 </template>

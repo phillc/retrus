@@ -1,11 +1,24 @@
-// current
-.standupMember.selected {
-  border: 3px solid red;
-  font-weight: bold;
+table.standupMemberList td {
+  padding: 0;
 }
 
-// after current
-.standupMember.selected ~ .standupMember, .standupMember.selected {
+// current
+.standupMember.selected td {
+  font-weight: bold;
+  background-color: #DFF0D8;
+}
+
+// 2 after current
+.standupMember.selected + .standupMember td,
+.standupMember.selected + .standupMember + .standupMember td {
+  background-color: #FCF8E3;
+}
+
+
+// all after current
+.standupMember.selected ~ .standupMember td,
+.standupMember.selected td {
   font-size: 32px;
   line-height: 36px;
+  padding: 8px;
 }
