@@ -10,14 +10,18 @@
 
 <body>
   {{> navigation }}
-  <div class="container">
+  {{> appContainer }}
+</body>
+
+<template name="appContainer">
+  <div class="container{{#if lightMode}} light{{/if}}">
     {{> home }}
     {{> group }}
     {{> standup }}
     {{> notFound }}
     {{> footer }}
   </div>
-</body>
+</template>
 
 <template name="navigation">
   {{#if show}}

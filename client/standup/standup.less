@@ -1,7 +1,3 @@
-table.standupMemberList td {
-  padding: 0;
-}
-
 // current
 .standupMember.selected td {
   font-weight: bold;
@@ -14,11 +10,16 @@ table.standupMemberList td {
   background-color: #FCF8E3;
 }
 
+.light table.standupMemberList {
+  td {
+    padding: 0;
+  }
 
-// all after current
-.standupMember.selected ~ .standupMember td,
-.standupMember.selected td {
-  font-size: 32px;
-  line-height: 36px;
-  padding: 8px;
+  // all after current
+  .standupMember.selected ~ .standupMember td,
+  .standupMember.selected td {
+    font-size: 32px;
+    line-height: 36px;
+    padding: 8px;
+  }
 }
