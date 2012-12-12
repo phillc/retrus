@@ -81,7 +81,7 @@ Template.standupActions.googleData = ->
 Template.standupMember.events =
   "click .delete-standup-member": ->
     StandupMembers.remove(@_id)
-  "click": ->
+  "click .standup-member-name": ->
     StandupMembers.update({group: Session.get("currentGroupId")}, {$set: {selected: false}}, {multi: true})
     StandupMembers.update(@_id, {$set: {selected: true}})
 
