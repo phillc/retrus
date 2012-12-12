@@ -1,7 +1,7 @@
 <template name="standup">
   {{#if show}}
     {{> standupActions}}
-    <table class="standupMemberList table">
+    <table class="standup-member-list table">
       <tbody>
         {{#each members}}
           {{> standupMember}}
@@ -44,7 +44,7 @@
 </template>
 
 <template name="standupMember">
-  <tr class="standupMember{{#if selected}} selected{{/if}}">
+  <tr class="standup-member{{#if selected}} selected{{/if}}">
     <td class="standup-member-name">{{name}}</td>
     {{> standupMemberActions}}
   </tr>
