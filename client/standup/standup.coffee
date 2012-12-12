@@ -27,7 +27,8 @@ Standup = do ->
       group = Session.get "currentGroupId"
       standupMembers = StandupMembers.find({group: Session.get("currentGroupId")})
       standupMembers.forEach (member) ->
-        StandupMembers.update({_id: member._id}, {$set: {position: Math.random(), selected: false}})
+        randomNumber = Math.floor(Math.random() * 1000000)
+        StandupMembers.update({_id: member._id}, {$set: {position: randomNumber, selected: false}})
 
     selectUnselected: (direction, sort) ->
       toBeSelected = @findUnselected direction: direction, sort: sort
