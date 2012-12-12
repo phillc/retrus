@@ -84,9 +84,6 @@ Template.standupMember.events =
     StandupMembers.update({group: Session.get("currentGroupId")}, {$set: {selected: false}}, {multi: true})
     StandupMembers.update(@_id, {$set: {selected: true}})
 
-Template.standupMemberActionsHeader.show = ->
-  Session.equals("standupEditing", true)
-
 Template.standupMemberActions.show = ->
   Session.equals("standupEditing", true)
 

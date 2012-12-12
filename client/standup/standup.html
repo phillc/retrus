@@ -2,10 +2,6 @@
   {{#if show}}
     {{> standupActions}}
     <table>
-      <thead>
-        <th>Name</th>
-        {{> standupMemberActionsHeader}}
-      </thead>
       <tbody>
         {{#each members}}
           {{> standupMember}}
@@ -52,12 +48,6 @@
     <td>{{name}}</td>
     {{> standupMemberActions}}
   </tr>
-</template>
-
-<template name="standupMemberActionsHeader">
-  {{#if show}}
-    <th>Actions</th>
-  {{/if}}
 </template>
 
 <template name="standupMemberActions">
