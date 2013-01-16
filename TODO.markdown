@@ -11,6 +11,7 @@ Must Have:
 
 Should Have:
 
+* Group people (for pairs or cities)
 * Focus iframe on id input
 * Tests
 * Better data security
