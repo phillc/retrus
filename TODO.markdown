@@ -16,6 +16,7 @@ Should Have:
 * Tests
 * Better data security
 * Figure out a way to reduce latency between deselecting all standup members and choosing the next (on all machines but the selecting)
+  * probably by moving the selected field to the group
 * Last shuffled on date
 * human readable group identifier
 * Big up and down button for standup participant on a mobile device
