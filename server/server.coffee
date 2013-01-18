@@ -18,3 +18,6 @@ StandupMembers.allow
   remove: (userId, docs) ->
     true
 
+Groups.allow
+  update: (userId, docs, fields, modifier) ->
+    true

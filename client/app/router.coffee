@@ -3,6 +3,7 @@ AppRouter = Backbone.Router.extend
     "": "root"
     "group/new": "groupNew"
     "group/:id": "group"
+    "group/:id/edit": "groupEdit"
     "group/:id/standup": "standup"
     "group/:id/standup/light": "standupLight"
     ".*": "notFound"
@@ -14,6 +15,11 @@ AppRouter = Backbone.Router.extend
   group: (groupId) ->
     @_setGroupPage
       group: true
+      groupId: groupId
+
+  groupEdit: (groupId) ->
+    @_setGroupPage
+      groupEdit: true
       groupId: groupId
 
   standupLight: (groupId) ->
@@ -31,7 +37,13 @@ AppRouter = Backbone.Router.extend
     @_setPage notFound: true
 
   _setGroupPage: (options) ->
-    if Groups.findOne(options.groupId)
+    group = Groups.findOne
+      $or: [
+        {_id: options.groupId},
+        {code: options.groupId}
+      ]
+    if group
+      options.groupId = group._id
       @_setPage options
     else
       @_setPage notFound: true
@@ -40,6 +52,7 @@ AppRouter = Backbone.Router.extend
     console.log options
     Session.set "homePage", !!options.home
     Session.set "groupPage", !!options.group
+    Session.set "groupEditPage", !!options.groupEdit
     Session.set "standupPage", !!options.standup
     Session.set "currentGroupId", options.groupId
     Session.set "notFoundPage", !!options.notFound
