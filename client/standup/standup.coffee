@@ -24,11 +24,11 @@ Standup = do ->
       StandupMembers.findOne(selector, {sort: {position: (options.sort || 1)}})
 
     shuffle: ->
-      group = Session.get "currentGroupId"
       standupMembers = StandupMembers.find({group: Session.get("currentGroupId")})
       standupMembers.forEach (member) ->
         randomNumber = Math.floor(Math.random() * 1000000)
         StandupMembers.update({_id: member._id}, {$set: {position: randomNumber, selected: false}})
+      Groups.update({_id: Session.get("currentGroupId")}, {$set: {standupLastShuffled: Standup.currentTime()}})
 
     selectUnselected: (direction, sort) ->
       toBeSelected = @findUnselected direction: direction, sort: sort
@@ -43,13 +43,15 @@ Standup = do ->
       @selectUnselected "lt", -1
 
   Members: new Members
+  currentTime: ->
+    now = new Date()
+    utc = now.getTime() + now.getTimezoneOffset() * 60000
+
 
 Template.standup.show = ->
   Session.equals("standupPage", true)
 
 Template.standup.events =
-  "click .standup-shuffle": ->
-    Standup.Members.shuffle()
   "click .standup-edit": ->
     Session.set "standupEditing", !Session.get("standupEditing")
   "click .standup-next": ->
@@ -77,6 +79,29 @@ Template.standupActions.show = ->
 
 Template.standupActions.googleData = ->
   Session.get "currentGroupId"
+
+Template.standupShuffle.events =
+  "click .standup-shuffle": ->
+    Standup.Members.shuffle()
+
+Template.standupShuffle.lastShuffled = ->
+  shuffled = Groups.findOne(Session.get("currentGroupId"))?.standupLastShuffled
+  if !shuffled
+    return ""
+
+  minutes = (Standup.currentTime() - shuffled) / 60000
+  if minutes <= 2
+    "(few minutes ago)"
+  else if minutes <= 5
+    "(< 5 minutes ago)"
+  else if minutes <= 60
+    "(< an hour ago)"
+  else if minutes < 300
+    "(few hours ago)"
+  else
+    ""
+
+
 
 Template.standupMember.events =
   "click .delete-standup-member": ->

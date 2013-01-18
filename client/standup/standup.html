@@ -15,6 +15,7 @@
 
 <template name="standupLight">
   {{#if show}}
+    {{> standupShuffle}}
     <a href="/group/{{groupId}}/standup" target="_blank" data-bypass>Launch Standup Assistant in retr.us</a>
   {{/if}}
 </template>
@@ -25,7 +26,7 @@
       <button class="standup-previous btn btn-info"><i class="icon-arrow-up"></i> previous</button>
       <button class="standup-next btn btn-info"><i class="icon-arrow-down"></i> next</button>
     </div>
-    <button class="standup-shuffle btn btn-inverse">shuffle</button>
+    {{> standupShuffle}}
     <button class="standup-edit btn btn-danger">toggle edit</button>
     <a href="https://plus.google.com/hangouts/_?gid=474121515436&gd={{googleData}}" style="text-decoration:none;" target="_blank" data-bypass>
       <img src="https://ssl.gstatic.com/s2/oz/images/stars/hangout/1/gplus-hangout-24x100-normal.png"
@@ -33,6 +34,10 @@
            style="border:0;width:100px;height:24px;"/>
     </a>
   {{/if}}
+</template>
+
+<template name="standupShuffle">
+  <button class="standup-shuffle btn btn-inverse">shuffle {{lastShuffled}}</button>
 </template>
 
 <template name="standupMemberNew">
