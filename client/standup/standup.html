@@ -16,7 +16,9 @@
 <template name="standupLight">
   {{#if show}}
     {{> standupShuffle}}
-    <a href="/group/{{groupId}}/standup" target="_blank" data-bypass>Launch Standup Assistant in retr.us</a>
+    <p>
+      <a href="/group/{{groupId}}/standup" target="_blank" data-bypass>Launch Standup Assistant in retr.us</a>
+    </p>
   {{/if}}
 </template>
 
