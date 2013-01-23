@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "main": "./server.js",
   "dependencies": {
-    "derby": "*",
+    "derby": "git://github.com/codeparty/derby#master",
+    "racer": "git://github.com/codeparty/racer#master",
     "express": "3.0.0beta4",
     "gzippo": ">=0.1.7"
   },
