@@ -1,0 +1,15 @@
+{
+  "name": "retrus",
+  "description": "",
+  "version": "0.0.0",
+  "main": "./server.js",
+  "dependencies": {
+    "derby": "*",
+    "express": "3.0.0beta4",
+    "gzippo": ">=0.1.7"
+  },
+  "private": true,
+  "devDependencies": {
+    "coffee-script": ">=1.3.3"
+  }
+}
