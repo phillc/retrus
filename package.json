@@ -7,7 +7,7 @@
     "derby": "git://github.com/codeparty/derby#master",
     "racer": "git://github.com/codeparty/racer#master",
     "express": "3.0.0beta4",
-    "gzippo": ">=0.1.7"
+    "gzippo": "0.1.7"
   },
   "private": true,
   "devDependencies": {
