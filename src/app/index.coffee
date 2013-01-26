@@ -9,7 +9,7 @@ start = +new Date()
 
 # Derby routes can be rendered on the client and the server
 get '/', (page, model, {roomName}) ->
-  page.render()
+  page.render('home')
 
 
 ## CONTROLLER FUNCTIONS ##
