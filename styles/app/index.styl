@@ -1,3 +1,37 @@
 .navbar {
   padding-bottom: 10px
 }
+
+
+// current
+.standup-member.selected td {
+  font-weight: bold;
+  background-color: #AADD99;
+}
+
+// 2 after current
+.standup-member.selected + .standup-member td,
+.standup-member.selected + .standup-member + .standup-member td {
+  background-color: #FCF8E3;
+}
+
+.light table.standup-member-list {
+  td {
+    padding: 0;
+  }
+
+  .standup-member.selected ~ .standup-member td {
+    font-size: 24px;
+    line-height: 28px;
+    padding: 4px;
+  }
+
+  // all after current
+  .standup-member.selected + .standup-member td,
+  .standup-member.selected + .standup-member + .standup-member td,
+  .standup-member.selected td {
+    font-size: 32px;
+    line-height: 36px;
+    padding: 8px;
+  }
+}
