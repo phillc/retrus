@@ -1,38 +1,33 @@
-<!--
-  Derby templates are similar to Handlebars, except that they are first
-  parsed as HTML, and there are a few extensions to make them work directly
-  with models. A single HTML template defines the HTML output, the event
-  handlers that update the model after user interaction, and the event handlers
-  that update the DOM when the model changes.
-
-  As in Handlebars, double curly braces output a value literally. Derby
-  templates add single curly braces, which output a value and set up
-  model <- -> view bindings for that object.
-
-  Elements that end in colon define template names. Pre-defined templates
-  are capitalized by convention, but template names are case-insensitive.
-  Pre-defined templates are automatically included when the page is rendered.
--->
-
 <Title:>
-  {{roomName}} - {_room.visits} visits
+  retr.us
+
+<Head:>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
 <Header:>
-  <!-- This is a component defined in the /ui directory -->
   <ui:connectionAlert>
+  <div class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="/">Retrus</a>
+        <ul class="nav pull-right">
+          <li>{{loginButtons}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
 <Body:>
-  <h1>{_room.welcome}</h1>
-  <p><label>Welcome message: <input value="{_room.welcome}"></label></p>
+  <h1>Retrus</h1>
 
-  <!-- Other templates are referenced like HTML elements -->
-  <p>This page has been visted {_room.visits} times. <app:timer></p>
+<Footer:>
+  <hr />
+  <footer>
+    <p>
+      &copy; <a href="http://phillc.com/" data-bypass>Phillip Campbell</a> 2012
+      |
+      <a href="/privacy_tos.html" data-bypass>Privacy & Terms of Service</a>
+    </p>
+  </footer>
 
-  <p>Let's go <a href="/{{randomUrl}}">somewhere random</a>.</p>
-
-<timer:>
-  {#if _stopped}
-    <a x-bind="click:start">Start timer</a>
-  {else}
-    You have been here for {_timer} seconds. <a x-bind="click:stop">Stop</a>
-  {/}
