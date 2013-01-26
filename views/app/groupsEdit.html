@@ -1,0 +1,22 @@
+<Body:>
+  <h1>{{groupName}}</h1>
+  <h2>Code: {{groupCode}}</h2>
+  <form action="javascript:void(0)" id="group-edit" class="form-horizontal">
+    <legend>Edit group: </legend>
+    <div class="control-group">
+      <label class="control-label" for="group-name">Name</label>
+      <div class="controls">
+        <input type="text" id="group-name" value="{{groupName}}" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="group-code">Code</label>
+      <div class="controls">
+        <input type="text" id="group-code" value="{{groupCode}}" />
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <a href="/group/{{groupId}}" class="btn btn-danger">Back</a>
+    </div>
+  </form>
