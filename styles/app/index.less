@@ -1,0 +1,120 @@
+::selection{ background-color: #00CCFF; color: white; }
+::moz-selection{ background-color: #00CCFF; color: white; }
+::webkit-selection{ background-color: #00CCFF; color: white; }
+
+body {
+  background: #F5F5F5;
+}
+
+header.navbar {
+  padding-bottom: 40px;
+
+  .navbar-inner {
+    background: #333333;
+  }
+
+  .brand {
+    font-family: 'Aclonica', sans-serif;
+    color: #F1F1F1;
+
+    .brand-highlight {
+      color: #00A0B1;
+    }
+  }
+
+  .nav {
+    border-right: 1px solid #323237;
+    border-left: 1px solid #4E4E53;
+
+    a {
+      background: transparent;
+      border-left: 1px solid #323237;
+      border-right: 1px solid #4E4E53;
+    }
+  }
+}
+
+aside#sidebar {
+  margin: 0 0 0 20px;
+
+  .nav {
+    margin: 0 0 0 -20px;
+    text-align: center;
+    font-size: 10px;
+
+    li {
+      a {
+        border: 0px solid transparent;
+
+        i {
+          width: 100%;
+        }
+      }
+    }
+    li.active {
+      a {
+        position: relative;
+        z-index: 50;
+
+        -webkit-border-radius: 5px 0px 0px 5px;
+        -moz-border-radius: 5px 0px 0px 5px;
+        border-radius: 5px 0px 0px 5px;
+        border: 2px solid #EEEEEE;
+        border-right: none;
+      }
+    }
+  }
+}
+
+#main {
+  background-color: #FFFFFF;
+  min-height: 500px;
+
+  -webkit-border-radius: 0px 5px 5px 5px;
+  -moz-border-radius: 0px 5px 5px 5px;
+  border-radius: 0px 5px 5px 5px;
+
+  border: 2px solid #EEEEEE;
+  margin-left: -2px;
+}
+
+
+
+
+
+
+
+
+
+// current
+.standup-member.selected td {
+  font-weight: bold;
+  background-color: #AADD99;
+}
+
+// 2 after current
+.standup-member.selected + .standup-member td,
+.standup-member.selected + .standup-member + .standup-member td {
+  background-color: #FCF8E3;
+}
+
+.light table.standup-member-list {
+  td {
+    padding: 0;
+  }
+
+  .standup-member.selected ~ .standup-member td {
+    font-size: 24px;
+    line-height: 28px;
+    padding: 4px;
+  }
+
+  // all after current
+  .standup-member.selected + .standup-member td,
+  .standup-member.selected + .standup-member + .standup-member td,
+  .standup-member.selected td {
+    font-size: 32px;
+    line-height: 36px;
+    padding: 8px;
+  }
+}
