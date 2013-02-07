@@ -7,8 +7,6 @@ body {
 }
 
 header.navbar {
-  padding-bottom: 40px;
-
   .navbar-inner {
     background: #333333;
   }
@@ -66,6 +64,65 @@ aside#sidebar {
   }
 }
 
+.landing {
+  background-color: #FFFFFF;
+  text-align: center;
+  padding: 30px;
+  border-bottom: 1px solid #AAAAAA;
+
+  h1 {
+    font-family: "Open Sans",Helvetica,Arial,sans-serif;
+    font-weight: 300;
+    font-size: 40px;
+    letter-spacing: -1px;
+  }
+
+  .carousel {
+    .item {
+      height: 300px;
+      overflow: hidden;
+
+      img {
+        margin: 0 auto;
+max-width: 100%;
+height: auto;
+      }
+    }
+  }
+}
+
+@media (min-width: 980px) {
+}
+
+@media (max-width: 979px) {
+  .landing {
+    .carousel {
+      .item {
+        height: 275px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+}
+
+@media (max-width: 767px) {
+  .landing {
+    margin-left: -20px;
+    margin-right: -20px;
+
+    .carousel {
+      .item {
+        height: 200px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+}
+
 #main {
   background-color: #FFFFFF;
   min-height: 500px;
@@ -77,6 +134,7 @@ aside#sidebar {
   border: 2px solid #EEEEEE;
   margin-left: -2px;
 }
+
 
 
 
