@@ -1,0 +1,59 @@
+<head>
+  <meta charset="utf-8">
+
+  <title>retr.us</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+</head>
+
+<body>
+  {{> navigation }}
+  {{> appContainer }}
+</body>
+
+<template name="appContainer">
+  <div class="container{{#if lightMode}} light{{/if}}">
+    {{> home }}
+    {{> group }}
+    {{> groupEdit }}
+    {{> standup }}
+    {{> notFound }}
+    {{> footer }}
+  </div>
+</template>
+
+<template name="navigation">
+  {{#if show}}
+    <div class="navbar navbar-inverse navbar-static-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Retrus</a>
+          <ul class="nav pull-right">
+            <li>{{loginButtons}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>
+
+<template name="notFound">
+  {{#if show}}
+    Page not found
+  {{/if}}
+</template>
+
+<template name="footer">
+  {{#if show}}
+    <hr />
+    <footer>
+      <p>
+        &copy; <a href="http://phillc.com/" data-bypass>Phillip Campbell</a> 2012
+        |
+        <a href="/privacy_tos.html" data-bypass>Privacy & Terms of Service</a>
+      </p>
+    </footer>
+  {{/if}}
+</template>

@@ -1,4 +1,0 @@
---colors
---reporter spec
---compilers coffee:coffee-script
---globals previousPage,scripts,_errors
