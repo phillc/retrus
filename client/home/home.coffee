@@ -10,4 +10,4 @@ Template.home.canCreateGroup = ->
   !!Meteor.userId()
 
 Template.home.groups = ->
-  Groups.find()
+  Groups.find({owner: Meteor.userId()})
