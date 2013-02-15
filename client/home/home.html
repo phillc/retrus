@@ -1,37 +1,64 @@
 <template name="home">
   {{#if show}}
-    <div class="row">
-      <div class="hero-unit">
-        <h1>Easier communication</h1>
-        <p>A suite of tools aimed at making distributed conversations better.</p>
-        <div>
-          {{#if canCreateGroup}}
-            <ul>
-              <li><button id="new-group" class="btn">Create a group</button></li>
-              {{#each groups}}
-                <li><a href="/group/{{_id}}">Enter "{{name}}"</a></li>
-              {{/each}}
-            </ul>
-          {{else}}
-            Sign in above to create a group
-          {{/if}}
-        </div>
+    <div class="landing">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div id="landingCarousel" class="carousel slide">
+              <div class="carousel-inner">
+                <div class="item active">
+                  <div class="row">
+                    <div class="span5">
+                      <h1>Built to assist distributed conversations</h1>
+                    </div>
+                    <div class="span7">
+                      <img src="/img/screen1.png" alt="">
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="row">
+                    <div class="span7">
+                      <img src="/img/screen2.png" alt="">
+                    </div>
+                    <div class="span5">
+                      <h1>Integrated with Google Hangouts</h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="row">
+                    <div class="span5">
+                      <h1>Real time collaboration</h1>
+                    </div>
+                    <div class="span7">
+                      <img src="/img/screen3.png" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="left carousel-control" href="#landingCarousel" data-slide="prev">&lsaquo;</a>
+              <a class="right carousel-control" href="#landingCarousel" data-slide="next">&rsaquo;</a>
+            </div>
+          </div>
+          </div>
       </div>
     </div>
-    <div class="row">
-      <div class="span4">
-        <h2>Retrospective Wall</h2>
-        <p>A tool for distributed collaboration</p>
-      </div>
-      <div class="span4">
-        <h2>Standup Assistant</h2>
-        <p>A tool for distributed standups</p>
-      </div>
-      <div class="span4">
-        <h2>Conversation Meter</h2>
-        <p>Assistance in nonverbal communication</p>
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <h2>Retrospective Wall</h2>
+          <p>A tool for distributed collaboration</p>
+        </div>
+        <div class="span4">
+          <h2>Standup Assistant</h2>
+          <p>A tool for distributed standups</p>
+        </div>
+        <div class="span4">
+          <h2>Conversation Meter</h2>
+          <p>Assistance in nonverbal communication</p>
+        </div>
       </div>
     </div>
   {{/if}}
 </template>
-
