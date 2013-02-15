@@ -1,15 +1,17 @@
 <template name="standup">
   {{#if show}}
-    {{> standupActions}}
-    <table class="standup-member-list table">
-      <tbody>
-        {{#each members}}
-          {{> standupMember}}
-        {{/each}}
-      </tbody>
-    </table>
-    {{> standupMemberNew}}
-    {{> standupLight}}
+    <div class="container{{#if lightMode}} light{{/if}}">
+      {{> standupActions}}
+      <table class="standup-member-list table">
+        <tbody>
+          {{#each members}}
+            {{> standupMember}}
+          {{/each}}
+        </tbody>
+      </table>
+      {{> standupMemberNew}}
+      {{> standupLight}}
+    </div>
   {{/if}}
 </template>
 

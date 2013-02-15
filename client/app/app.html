@@ -54,19 +54,23 @@
 
 <template name="notFound">
   {{#if show}}
-    Page not found
+    <div class="container">
+      Page not found
+    </div>
   {{/if}}
 </template>
 
 <template name="footer">
   {{#if show}}
-    <hr />
-    <footer>
-      <p>
-        &copy; <a href="http://phillc.com/" data-bypass>Phillip Campbell</a> 2013
-        |
-        <a href="/privacy_tos.html" data-bypass>Privacy & Terms of Service</a>
-      </p>
-    </footer>
+    <div class="container">
+      <hr />
+      <footer>
+        <p>
+          &copy; <a href="http://phillc.com/" data-bypass>Phillip Campbell</a> 2013
+          |
+          <a href="/privacy_tos.html" data-bypass>Privacy & Terms of Service</a>
+        </p>
+      </footer>
+    </div>
   {{/if}}
 </template>

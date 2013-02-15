@@ -1,38 +1,42 @@
 <template name="group">
   {{#if show}}
-    <h1>{{groupName}}</h1>
-    <h2>Code: {{groupCode}}</h2>
-    <div>
-      <a href="/group/{{groupId}}/standup" class="btn">Stand up</a>
-      <a href="/group/{{groupId}}/retrospective" class="btn">Retrospective</a>
-      <a href="http://pat.retr.us" class="btn">Conversation Meter</a>
-      <a href="/group/{{groupId}}/edit" class="btn btn-danger">Edit Group</a>
+    <div class="container">
+      <h1>{{groupName}}</h1>
+      <h2>Code: {{groupCode}}</h2>
+      <div>
+        <a href="/group/{{groupId}}/standup" class="btn">Stand up</a>
+        <a href="/group/{{groupId}}/retrospective" class="btn">Retrospective</a>
+        <a href="http://pat.retr.us" class="btn">Conversation Meter</a>
+        <a href="/group/{{groupId}}/edit" class="btn btn-danger">Edit Group</a>
+      </div>
     </div>
   {{/if}}
 </template>
 
 <template name="groupEdit">
   {{#if show}}
-    <h1>{{groupName}}</h1>
-    <h2>Code: {{groupCode}}</h2>
-    <form action="javascript:void(0)" id="group-edit" class="form-horizontal">
-      <legend>Edit group: </legend>
-      <div class="control-group">
-        <label class="control-label" for="group-name">Name</label>
-        <div class="controls">
-          <input type="text" id="group-name" value="{{groupName}}" />
+    <div class="container">
+      <h1>{{groupName}}</h1>
+      <h2>Code: {{groupCode}}</h2>
+      <form action="javascript:void(0)" id="group-edit" class="form-horizontal">
+        <legend>Edit group: </legend>
+        <div class="control-group">
+          <label class="control-label" for="group-name">Name</label>
+          <div class="controls">
+            <input type="text" id="group-name" value="{{groupName}}" />
+          </div>
         </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="group-code">Code</label>
-        <div class="controls">
-          <input type="text" id="group-code" value="{{groupCode}}" />
+        <div class="control-group">
+          <label class="control-label" for="group-code">Code</label>
+          <div class="controls">
+            <input type="text" id="group-code" value="{{groupCode}}" />
+          </div>
         </div>
-      </div>
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a href="/group/{{groupId}}" class="btn btn-danger">Back</a>
-      </div>
-    </form>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a href="/group/{{groupId}}" class="btn btn-danger">Back</a>
+        </div>
+      </form>
+    </div>
   {{/if}}
 </template>
