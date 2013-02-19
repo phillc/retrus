@@ -51,6 +51,9 @@ Standup = do ->
 Template.standup.show = ->
   Session.equals("standupPage", true)
 
+Template.standup.lightMode = ->
+  Session.equals "lightMode", true
+
 Template.standup.events =
   "click .standup-edit": ->
     Session.set "standupEditing", !Session.get("standupEditing")

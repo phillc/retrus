@@ -11,5 +11,3 @@ Template.footer.show = ->
 Template.navigation.show = ->
   Session.equals "lightMode", false
 
-Template.appContainer.lightMode = ->
-  Session.equals "lightMode", true
